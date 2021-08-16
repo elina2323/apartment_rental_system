@@ -16,11 +16,13 @@ public class ApartmentDTO {
 
     String address;
 
-    double price;
+    double pricePerUnit;
 
     ApartmentStatus apartmentStatus;
 
-    User user;
+    UserDTO user;
+
+    UnitDTO unit;
 
     String otherDetails;
 

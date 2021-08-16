@@ -27,6 +27,4 @@ public class Payment {
     @ManyToOne
     @JoinColumn(columnDefinition = "apartment_booking_id")
     ApartmentBooking apartmentBooking;
-
-
 }

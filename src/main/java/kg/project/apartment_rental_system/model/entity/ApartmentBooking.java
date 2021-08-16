@@ -27,9 +27,6 @@ public class ApartmentBooking {
     @NonNull
     LocalDate checkOutDate;
 
-    @NonNull
-    int amountOfDays;
-
     @CreationTimestamp
     LocalDate dateCreated;
 
