@@ -37,7 +37,4 @@ public class ApartmentBooking {
     @JoinColumn(columnDefinition = "apartment_id")
     Apartment apartment;
 
-
-
-
 }
