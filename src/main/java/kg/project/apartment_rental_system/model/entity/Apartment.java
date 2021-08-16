@@ -26,7 +26,7 @@ public class Apartment {
     String address;
 
     @NonNull
-    double price;
+    double pricePerUnit;
 
     @Enumerated(value = EnumType.STRING)
     ApartmentStatus apartmentStatus;
@@ -34,6 +34,10 @@ public class Apartment {
     @ManyToOne
     @JoinColumn(columnDefinition = "users")
     User user;
+
+    @ManyToOne
+    @JoinColumn(columnDefinition = "unit_id")
+    Unit unit;
 
     String otherDetails;
 

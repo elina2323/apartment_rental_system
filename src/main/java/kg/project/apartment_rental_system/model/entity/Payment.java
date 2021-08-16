@@ -1,10 +1,10 @@
 package kg.project.apartment_rental_system.model.entity;
 
-import kg.project.apartment_rental_system.model.entity.Apartment;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -12,14 +12,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "apartments")
-public class Image {
+@Table(name = "payments")
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    LocalDate paymentDate;
+
+    @NonNull
+    double totalPrice;
+
     @ManyToOne
-    @JoinColumn(columnDefinition = "apartment_id")
-    Apartment apartment;
+    @JoinColumn(columnDefinition = "apartment_booking_id")
+    ApartmentBooking apartmentBooking;
+
+
 }

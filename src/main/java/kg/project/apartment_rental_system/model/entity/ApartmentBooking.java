@@ -37,4 +37,18 @@ public class ApartmentBooking {
     @JoinColumn(columnDefinition = "apartment_id")
     Apartment apartment;
 
+    @ManyToOne
+    @JoinColumn(columnDefinition = "unit_id")
+    Unit unit;
+
+    @NonNull
+    double pricePerUnit;
+
+    @NonNull
+    double totalPrice;
+
+    @ManyToOne
+    @JoinColumn(columnDefinition = "user_id")
+    User user;
+
 }
