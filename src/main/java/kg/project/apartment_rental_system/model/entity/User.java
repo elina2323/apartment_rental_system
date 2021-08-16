@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.entity;
 
+import kg.project.apartment_rental_system.model.enums.UserStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;

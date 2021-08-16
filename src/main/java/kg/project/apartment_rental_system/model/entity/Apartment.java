@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.entity;
 
+import kg.project.apartment_rental_system.model.enums.ApartmentStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
