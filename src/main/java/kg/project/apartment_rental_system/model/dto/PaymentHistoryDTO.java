@@ -4,17 +4,18 @@ import kg.project.apartment_rental_system.model.entity.ReserveHistory;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+
 import java.time.LocalDate;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PaymentDTO {
+public class PaymentHistoryDTO {
 
     Long id;
 
-    LocalDate paymentDate;
+    LocalDate addDate;
 
-    double totalPrice;
+    double cash;
 
     ReserveHistory reserveHistory;
 }

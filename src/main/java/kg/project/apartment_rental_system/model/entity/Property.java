@@ -28,7 +28,7 @@ public class Property {
     String address;
 
     @NonNull
-    double pricePerUnit;
+    double price;
 
     @ManyToOne
     @JoinColumn(columnDefinition = "users")
@@ -69,12 +69,5 @@ public class Property {
     String lan;
 
     String lon;
-
-
-
-
-
-
-
 
 }

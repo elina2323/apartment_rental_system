@@ -1,6 +1,6 @@
 package kg.project.apartment_rental_system.mapper;
 
-import kg.project.apartment_rental_system.model.dto.ApartmentBookingDTO;
+import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
 import kg.project.apartment_rental_system.model.entity.ReserveHistory;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -12,11 +12,11 @@ public interface ApartmentBookingMapper {
 
     ApartmentBookingMapper INSTANCE = Mappers.getMapper(ApartmentBookingMapper.class);
 
-    ReserveHistory toApartmentBooking(ApartmentBookingDTO apartmentBookingDTO);
+    ReserveHistory toApartmentBooking(ReserveHistoryDTO reserveHistoryDTO);
 
-    ApartmentBookingDTO toApartmentBookingDTO(ReserveHistory reserveHistory);
+    ReserveHistoryDTO toApartmentBookingDTO(ReserveHistory reserveHistory);
 
-    List<ReserveHistory> toApartmentBookingList(List<ApartmentBookingDTO> apartmentBookingDTOList);
+    List<ReserveHistory> toApartmentBookingList(List<ReserveHistoryDTO> reserveHistoryDTOList);
 
-    List<ApartmentBookingDTO> toApartmentBookingDTOList(List<ReserveHistory> reserveHistoryList);
+    List<ReserveHistoryDTO> toApartmentBookingDTOList(List<ReserveHistory> reserveHistoryList);
 }

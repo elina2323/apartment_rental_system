@@ -1,6 +1,6 @@
 package kg.project.apartment_rental_system.mapper;
 
-import kg.project.apartment_rental_system.model.dto.ApartmentDTO;
+import kg.project.apartment_rental_system.model.dto.PropertyDTO;
 import kg.project.apartment_rental_system.model.entity.Property;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -13,11 +13,11 @@ public interface ApartmentMapper {
     ApartmentMapper INSTANCE = Mappers.getMapper(ApartmentMapper.class);
 
 
-    Property toApartment(ApartmentDTO apartmentDTO);
+    Property toApartment(PropertyDTO propertyDTO);
 
-    ApartmentDTO toApartmentDTO(Property property);
+    PropertyDTO toApartmentDTO(Property property);
 
-    List<Property> toApartmentList(List<ApartmentDTO> apartmentDTOList);
+    List<Property> toApartmentList(List<PropertyDTO> propertyDTOList);
 
-    List<ApartmentDTO> toApartmentDTOList(List<Property> propertyList);
+    List<PropertyDTO> toApartmentDTOList(List<Property> propertyList);
 }

@@ -12,4 +12,8 @@ public class ImageDTO {
     Long id;
 
     Property property;
+
+    String url;
+
+    long orderNum;
 }
