@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface ImageRepo extends JpaRepository<Image, Long> {
 
-    List<Image> findImagesByApartment_Id(Long apartment_id);
+    List<Image> findImagesByProperty_Id(Long property_id);
 }
