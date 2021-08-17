@@ -4,8 +4,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Data
 @Builder
@@ -13,13 +11,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "units")
-public class Unit {
+@Table(name = "town_suburbs_id")
+public class TownSuburb {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @NonNull
-    String unitName;
+    String name;
+
+    @ManyToOne
+    @JoinColumn(columnDefinition = "region_id")
+    Region region;
 }

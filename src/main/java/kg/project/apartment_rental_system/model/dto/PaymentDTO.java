@@ -1,6 +1,6 @@
 package kg.project.apartment_rental_system.model.dto;
 
-import kg.project.apartment_rental_system.model.entity.ApartmentBooking;
+import kg.project.apartment_rental_system.model.entity.ReserveHistory;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -16,5 +16,5 @@ public class PaymentDTO {
 
     double totalPrice;
 
-    ApartmentBooking apartmentBooking;
+    ReserveHistory reserveHistory;
 }

@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.entity;
 
+import kg.project.apartment_rental_system.model.enums.CodeStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,19 +13,25 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "payments")
-public class Payment {
+@Table(name = "codes")
+public class Code {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    LocalDate paymentDate;
-
     @NonNull
-    double totalPrice;
+    Long code;
+
+    LocalDate startDate;
+
+    LocalDate endDate;
+
+    @Enumerated(value = EnumType.STRING)
+    CodeStatus codeStatus;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "apartment_booking_id")
-    ApartmentBooking apartmentBooking;
+    @JoinColumn(columnDefinition = "user_id")
+    User user;
+
 }

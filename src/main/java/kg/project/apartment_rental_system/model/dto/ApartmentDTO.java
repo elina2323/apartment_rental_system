@@ -1,7 +1,6 @@
 package kg.project.apartment_rental_system.model.dto;
 
-import kg.project.apartment_rental_system.model.entity.User;
-import kg.project.apartment_rental_system.model.enums.ApartmentStatus;
+import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -18,11 +17,9 @@ public class ApartmentDTO {
 
     double pricePerUnit;
 
-    ApartmentStatus apartmentStatus;
+    ReserveStatus reserveStatus;
 
     UserDTO user;
-
-    UnitDTO unit;
 
     String otherDetails;
 

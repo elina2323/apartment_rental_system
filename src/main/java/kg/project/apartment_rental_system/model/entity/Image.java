@@ -1,6 +1,5 @@
 package kg.project.apartment_rental_system.model.entity;
 
-import kg.project.apartment_rental_system.model.entity.Apartment;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -21,5 +20,11 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(columnDefinition = "apartment_id")
-    Apartment apartment;
+    Property property;
+
+    @NonNull
+    String url;
+
+    @NonNull
+    long orderNum;
 }

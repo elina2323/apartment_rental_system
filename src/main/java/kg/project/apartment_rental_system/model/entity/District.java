@@ -1,13 +1,9 @@
 package kg.project.apartment_rental_system.model.entity;
 
-import kg.project.apartment_rental_system.model.enums.UserStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @Builder
@@ -15,16 +11,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "districts")
+public class District {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @NonNull
-    String phone;
+    String name;
 
-    @UpdateTimestamp
-    LocalDate blockDate;
+    @ManyToOne
+    @JoinColumn(columnDefinition = "town_suburb_id")
+    TownSuburb townSuburb;
 }

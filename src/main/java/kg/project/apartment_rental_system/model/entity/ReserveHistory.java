@@ -1,6 +1,6 @@
 package kg.project.apartment_rental_system.model.entity;
 
-import kg.project.apartment_rental_system.model.entity.Apartment;
+import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "apartment_bookings")
-public class ApartmentBooking {
+public class ReserveHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,25 +27,18 @@ public class ApartmentBooking {
     @NonNull
     LocalDate checkOutDate;
 
-    @CreationTimestamp
-    LocalDate dateCreated;
-
     @ManyToOne
     @JoinColumn(columnDefinition = "apartment_id")
-    Apartment apartment;
-
-    @ManyToOne
-    @JoinColumn(columnDefinition = "unit_id")
-    Unit unit;
-
-    @NonNull
-    double pricePerUnit;
+    Property property;
 
     @NonNull
     double totalPrice;
 
-    @ManyToOne
-    @JoinColumn(columnDefinition = "user_id")
-    User user;
+    @Enumerated(value = EnumType.STRING)
+    ReserveStatus reserveStatus;
+
+    LocalDate addDate;
+
+    LocalDate editDate;
 
 }

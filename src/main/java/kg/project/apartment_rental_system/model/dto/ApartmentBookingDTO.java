@@ -1,8 +1,5 @@
 package kg.project.apartment_rental_system.model.dto;
 
-import kg.project.apartment_rental_system.model.entity.Apartment;
-import kg.project.apartment_rental_system.model.entity.Unit;
-import kg.project.apartment_rental_system.model.entity.User;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -22,8 +19,6 @@ public class ApartmentBookingDTO {
     LocalDate dateCreated;
 
     ApartmentDTO apartment;
-
-    UnitDTO unit;
 
     double pricePerUnit;
 
