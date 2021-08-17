@@ -28,5 +28,4 @@ public class Request {
     @JoinColumn(columnDefinition = "code_id")
     Code code;
 
-
 }
