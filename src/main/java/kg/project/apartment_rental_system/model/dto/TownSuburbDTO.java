@@ -13,5 +13,5 @@ public class TownSuburbDTO {
 
     String name;
 
-    Region region;
+    RegionDTO region;
 }

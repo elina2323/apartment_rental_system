@@ -17,5 +17,5 @@ public class RequestDTO {
 
     boolean success;
 
-    Code code;
+    CodeDTO code;
 }

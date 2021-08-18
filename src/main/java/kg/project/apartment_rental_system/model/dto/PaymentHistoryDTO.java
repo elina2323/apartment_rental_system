@@ -17,5 +17,5 @@ public class PaymentHistoryDTO {
 
     double cash;
 
-    ReserveHistory reserveHistory;
+    ReserveHistoryDTO reserveHistory;
 }

@@ -11,7 +11,7 @@ public class ImageDTO {
 
     Long id;
 
-    Property property;
+    PropertyDTO property;
 
     String url;
 

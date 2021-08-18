@@ -13,5 +13,5 @@ public class DistrictDTO {
 
     String name;
 
-    TownSuburb townSuburb;
+    TownSuburbDTO townSuburb;
 }

@@ -18,7 +18,7 @@ public class ReserveHistoryDTO {
 
     LocalDate checkOutDate;
 
-    Property property;
+    PropertyDTO property;
 
     double totalPrice;
 

@@ -22,7 +22,7 @@ public class PropertyDTO {
 
     double price;
 
-    User user;
+    UserDTO user;
 
     String description;
 
@@ -30,15 +30,15 @@ public class PropertyDTO {
 
     double area;
 
-    Type type;
+    TypeDTO type;
 
     boolean internet;
 
     boolean furniture;
 
-    TownSuburb townSuburb;
+    TownSuburbDTO townSuburb;
 
-    District district;
+    DistrictDTO district;
 
     LocalDate addDate;
 

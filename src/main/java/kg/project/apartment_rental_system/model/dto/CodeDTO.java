@@ -22,5 +22,5 @@ public class CodeDTO {
 
     CodeStatus codeStatus;
 
-    User user;
+    UserDTO user;
 }
