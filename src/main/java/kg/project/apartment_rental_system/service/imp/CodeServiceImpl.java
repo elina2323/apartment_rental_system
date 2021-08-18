@@ -32,11 +32,10 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     public Request auth(String phone, long code) {
-
-        User user = userRepo.findUserByPhone(phone);
-
-
     }
+
+    // User's Authorisation
+        User user = userRepo.findUserByPhone(phone);
 
 
 }
