@@ -15,7 +15,7 @@ public interface CodeMapper {
 
     CodeMapper INSTANCE = Mappers.getMapper(CodeMapper.class);
 
-    default Code toCode(UserDTO userDTO, String code1, int result, RequestDTO requestDTO){
+    default Code toCode(UserDTO userDTO, int result, RequestDTO requestDTO){
 
         Code code = new Code();
 
@@ -25,7 +25,6 @@ public interface CodeMapper {
         code.setEndDate(LocalDateTime.now().plusHours(1));
         requestDTO.setSuccess(result == 1);
         return code;
-
     }
 
     Code toCode(CodeDTO codeDTO);

@@ -1,7 +1,6 @@
 package kg.project.apartment_rental_system.service;
 
 import kg.project.apartment_rental_system.model.dto.UserDTO;
-import kg.project.apartment_rental_system.model.entity.Request;
 
 import java.time.LocalDate;
 

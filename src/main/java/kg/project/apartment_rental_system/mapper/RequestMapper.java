@@ -12,7 +12,7 @@ public interface RequestMapper {
 
     RequestMapper INSTANCE = Mappers.getMapper(RequestMapper.class);
 
-    Request toRequest(RequestDTO requestDTO);
+    Request toRequest(Request requestDTO);
 
     RequestDTO toRequestDTO(Request request);
 

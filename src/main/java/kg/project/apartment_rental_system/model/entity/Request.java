@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -21,7 +22,7 @@ public class Request {
     Long id;
 
     @CreationTimestamp
-    LocalDate addDate;
+    LocalDateTime addDate;
 
     @NonNull
     boolean success;

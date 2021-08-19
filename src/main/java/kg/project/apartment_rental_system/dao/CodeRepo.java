@@ -14,5 +14,5 @@ import java.util.Date;
 public interface CodeRepo extends JpaRepository<Code, Long> {
 
     Code findByUserAndCodeStatus(User user, CodeStatus codeStatus);
-    Code findByUserAndCodeStatusAndStartDateAfter(User user, CodeStatus codeStatus, LocalDate startDate);
+    Code findByUserAndCodeStatusAndStartDateAfter(User user, CodeStatus codeStatus, LocalDateTime startDate);
 }

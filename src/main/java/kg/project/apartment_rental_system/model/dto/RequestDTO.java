@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -15,7 +16,7 @@ public class RequestDTO {
     Long id;
 
     @CreationTimestamp
-    LocalDate addDate;
+    LocalDateTime addDate;
 
     boolean success;
 
