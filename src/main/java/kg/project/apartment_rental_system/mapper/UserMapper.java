@@ -19,4 +19,13 @@ public interface UserMapper {
     List<User> toUserList(List<UserDTO> userDTOList);
 
     List<UserDTO> toUserDTOList(List<User> userList);
+
+    default UserDTO addUser(String phone){
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setPhone(phone);
+        return userDTO;
+    }
+
+
 }

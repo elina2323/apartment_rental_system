@@ -5,7 +5,7 @@ import kg.project.apartment_rental_system.model.entity.Request;
 
 public interface CodeService {
 
-    Code create(Long code);
-    Request auth(String phone, long code);
+    Code create(String code);
+    Request auth(String phone, String code);
 
 }

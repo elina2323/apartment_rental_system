@@ -3,9 +3,12 @@ package kg.project.apartment_rental_system.model.entity;
 import kg.project.apartment_rental_system.model.enums.CodeStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -21,11 +24,13 @@ public class Code {
     Long id;
 
     @NonNull
-    Long code;
+    String code;
 
-    LocalDate startDate;
+    @CreationTimestamp
+    LocalDateTime startDate;
 
-    LocalDate endDate;
+    @LastModifiedDate
+    LocalDateTime endDate;
 
     @Enumerated(value = EnumType.STRING)
     CodeStatus codeStatus;

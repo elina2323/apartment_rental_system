@@ -11,5 +11,4 @@ import java.time.LocalDate;
 public interface UserRepo extends JpaRepository<User, Long> {
 
     User findUserByPhone(@NonNull String phone);
-    boolean existsByBlockDateAndPhone(LocalDate blockDate, @NonNull String phone);
 }

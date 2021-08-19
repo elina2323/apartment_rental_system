@@ -45,7 +45,7 @@ public interface PropertyMapper {
         propertyDTO.setAddress(property.getAddress());
         propertyDTO.setArea(property.getArea());
         propertyDTO.setDescription(property.getDescription());
-        propertyDTO.setDistrict(DistrictMapper.INSTANCE.toDistrict(property.getDistrict()));
+        propertyDTO.setDistrict(DistrictMapper.INSTANCE.toDistrictDTO(property.getDistrict()));
         propertyDTO.setEditDate(property.getEditDate());
         propertyDTO.setFloor(property.getFloor());
         propertyDTO.setFurniture(property.isFurniture());
@@ -54,9 +54,9 @@ public interface PropertyMapper {
         propertyDTO.setLon(property.getLon());
         propertyDTO.setPrice(property.getPrice());
         propertyDTO.setRoomAmount(property.getRoomAmount());
-        propertyDTO.setTownSuburb(TownSuburbMapper.INSTANCE.toTownSuburb(property.getTownSuburb()));
-        propertyDTO.setType(TypeMapper.INSTANCE.toType(property.getType()));
-        propertyDTO.setUser(UserMapper.INSTANCE.toUser(property.getUser()));
+        propertyDTO.setTownSuburb(TownSuburbMapper.INSTANCE.toTownSuburbDTO(property.getTownSuburb()));
+        propertyDTO.setType(TypeMapper.INSTANCE.toTypeDTO(property.getType()));
+        propertyDTO.setUser(UserMapper.INSTANCE.toUserDTO(property.getUser()));
 
         return propertyDTO;
     }
@@ -73,7 +73,7 @@ public interface PropertyMapper {
             propertyDTO.setAddress(x.getAddress());
             propertyDTO.setArea(x.getArea());
             propertyDTO.setDescription(x.getDescription());
-            propertyDTO.setDistrict(DistrictMapper.INSTANCE.toDistrict(x.getDistrict()));
+            propertyDTO.setDistrict(DistrictMapper.INSTANCE.toDistrictDTO(x.getDistrict()));
             propertyDTO.setEditDate(x.getEditDate());
             propertyDTO.setFloor(x.getFloor());
             propertyDTO.setFurniture(x.isFurniture());
@@ -82,9 +82,9 @@ public interface PropertyMapper {
             propertyDTO.setLon(x.getLon());
             propertyDTO.setPrice(x.getPrice());
             propertyDTO.setRoomAmount(x.getRoomAmount());
-            propertyDTO.setTownSuburb(TownSuburbMapper.INSTANCE.toTownSuburb(x.getTownSuburb()));
-            propertyDTO.setType(TypeMapper.INSTANCE.toType(x.getType()));
-            propertyDTO.setUser(UserMapper.INSTANCE.toUser(x.getUser()));
+            propertyDTO.setTownSuburb(TownSuburbMapper.INSTANCE.toTownSuburbDTO(x.getTownSuburb()));
+            propertyDTO.setType(TypeMapper.INSTANCE.toTypeDTO(x.getType()));
+            propertyDTO.setUser(UserMapper.INSTANCE.toUserDTO(x.getUser()));
             return propertyDTO;
 
         }).collect(Collectors.toList());

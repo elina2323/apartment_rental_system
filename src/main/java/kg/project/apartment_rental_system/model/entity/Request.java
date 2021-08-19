@@ -2,6 +2,7 @@ package kg.project.apartment_rental_system.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @CreationTimestamp
     LocalDate addDate;
 
     @NonNull
