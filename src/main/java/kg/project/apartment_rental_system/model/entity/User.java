@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -26,5 +27,5 @@ public class User {
     String phone;
 
     @UpdateTimestamp
-    LocalDate blockDate;
+    LocalDateTime blockDate;
 }

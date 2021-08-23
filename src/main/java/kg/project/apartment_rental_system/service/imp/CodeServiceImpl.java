@@ -11,11 +11,10 @@ import kg.project.apartment_rental_system.model.enums.CodeStatus;
 import kg.project.apartment_rental_system.service.CodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -24,22 +23,22 @@ public class CodeServiceImpl implements CodeService {
 
     private final CodeRepo codeRepo;
 
-    @Override
-    public CodeDTO saveCode(UserDTO userDTO, int result, RequestDTO requestDTO) {
 
+    @Override
+    public CodeDTO saveCode(UserDTO userDTO, String generatedCode) {
         log.info("IN CodeServiceImpl saveCode {}", userDTO);
 
         Code newCode = new Code();
         newCode.setUser(UserMapper.INSTANCE.toUser(userDTO));
-        String generatedString = RandomStringUtils.randomAlphanumeric(4);
-        newCode.setCode(generatedString);
+//        String generatedString = RandomStringUtils.randomAlphanumeric(4);
+//        newCode.setCode(generatedString);
         newCode.setStartDate(LocalDateTime.now());
         newCode.setEndDate(LocalDateTime.now().plusHours(1));
-        requestDTO.setSuccess(result == 1);
         codeRepo.save(newCode);
         return CodeMapper.INSTANCE.toCodeDTO(newCode);
-
     }
+
+
 
     @Override
     public CodeDTO getCodeByUserAndCodeStatus(UserDTO userDTO, CodeStatus codeStatus) {
@@ -68,5 +67,6 @@ public class CodeServiceImpl implements CodeService {
         Code code = codeRepo.findByUserAndCodeStatusAndStartDateAfter(UserMapper.INSTANCE.toUser(userDTO),codeStatus,startDate);
         return CodeMapper.INSTANCE.toCodeDTO(code);
     }
+
 
 }

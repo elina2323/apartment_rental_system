@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO save(UserDTO userDTO) {
 
         log.info("IN UserServiceImpl save {}", userDTO);
+
         User user = UserMapper.INSTANCE.toUser(userDTO);
         if(user == userRepo.findUserByPhone(userDTO.getPhone())){
            throw new RuntimeException("Такой пользователь уже существует");
@@ -38,11 +39,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO checkBlockDate(Long id, LocalDate localDate) {
+
         return null;
     }
 
     @Override
     public UserDTO findUserByPhone(String phone) {
-        return null;
+
+        log.info("IN UserServiceImpl findUserByPhone {}", phone);
+
+        User user = userRepo.findUserByPhone(phone);
+        return UserMapper.INSTANCE.toUserDTO(user);
     }
 }

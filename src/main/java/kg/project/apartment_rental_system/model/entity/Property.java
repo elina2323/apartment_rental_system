@@ -60,6 +60,10 @@ public class Property {
     @JoinColumn(columnDefinition = "district_id")
     District district;
 
+    @ManyToOne
+    @JoinColumn(columnDefinition = "region_id")
+    Region region;
+
     @CreationTimestamp
     LocalDate addDate;
 

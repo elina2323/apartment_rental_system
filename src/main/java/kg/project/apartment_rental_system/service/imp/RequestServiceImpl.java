@@ -4,6 +4,7 @@ import kg.project.apartment_rental_system.dao.RequestRepo;
 import kg.project.apartment_rental_system.mapper.CodeMapper;
 import kg.project.apartment_rental_system.mapper.RequestMapper;
 import kg.project.apartment_rental_system.model.dto.CodeDTO;
+import kg.project.apartment_rental_system.model.dto.RequestDTO;
 import kg.project.apartment_rental_system.model.entity.Request;
 import kg.project.apartment_rental_system.service.RequestService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class RequestServiceImpl implements RequestService {
     private RequestRepo requestRepo;
 
     @Override
-    public Request saveRequest(CodeDTO codeDTO, boolean isSuccess) {
+    public RequestDTO saveRequest(CodeDTO codeDTO, boolean isSuccess) {
 
         log.info("IN RequestServiceImpl saveRequest {}", codeDTO);
 
@@ -29,11 +30,13 @@ public class RequestServiceImpl implements RequestService {
         request.setAddDate(LocalDateTime.now());
         request.setSuccess(isSuccess);
         request = requestRepo.save(request);
-        return RequestMapper.INSTANCE.toRequest(request);
+        return RequestMapper.INSTANCE.toRequestDTO(request);
     }
 
     @Override
     public int getCountOfUnsuccessfulRequests(CodeDTO codeDTO, boolean isSuccess) {
+
+        log.info("IN RequestServiceImpl getCountOfUnsuccessfulRequests {}", codeDTO);
 
         return requestRepo.countRequestsByCodeAndSuccessIs(CodeMapper.INSTANCE.toCode(codeDTO),isSuccess);
     }

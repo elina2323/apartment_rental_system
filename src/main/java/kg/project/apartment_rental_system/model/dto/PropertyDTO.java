@@ -1,9 +1,5 @@
 package kg.project.apartment_rental_system.model.dto;
 
-import kg.project.apartment_rental_system.model.entity.District;
-import kg.project.apartment_rental_system.model.entity.TownSuburb;
-import kg.project.apartment_rental_system.model.entity.Type;
-import kg.project.apartment_rental_system.model.entity.User;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -39,6 +35,8 @@ public class PropertyDTO {
     TownSuburbDTO townSuburb;
 
     DistrictDTO district;
+
+    RegionDTO region;
 
     LocalDate addDate;
 

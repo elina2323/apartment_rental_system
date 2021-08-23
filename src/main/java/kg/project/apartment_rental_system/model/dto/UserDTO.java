@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -14,5 +15,5 @@ public class UserDTO {
 
     String phone;
 
-    LocalDate blockDate;
+    LocalDateTime blockDate;
 }
