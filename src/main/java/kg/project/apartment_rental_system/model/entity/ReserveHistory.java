@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.entity;
 
+import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,8 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "apartment_bookings")
-public class ReserveHistory {
+@Table(name = "property_bookings")
+public class ReserveHistory extends ReserveHistoryDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +29,18 @@ public class ReserveHistory {
     LocalDate checkOutDate;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "apartment_id")
+    @JoinColumn(columnDefinition = "property_id")
     Property property;
+
+    @ManyToOne
+    @JoinColumn(columnDefinition = "user_id")
+    User user;
 
     @NonNull
     double totalPrice;
+
+    @NonNull
+    double debt;
 
     @Enumerated(value = EnumType.STRING)
     ReserveStatus reserveStatus;

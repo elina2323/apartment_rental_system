@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 public class PropertyServiceImpl implements PropertyService {
 
-    private PropertyRepo propertyRepo;
+    private final PropertyRepo propertyRepo;
 
     @Autowired
     public PropertyServiceImpl(PropertyRepo propertyRepo) {
@@ -41,8 +41,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PropertyDTO findById(Long id)
-            throws ResourceNotFoundException {
+    public PropertyDTO findById(Long id) throws ResourceNotFoundException {
         log.info("IN PropertyServiceImpl findById {}", id);
         Property property = propertyRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException
@@ -54,19 +53,26 @@ public class PropertyServiceImpl implements PropertyService {
     public List<PropertyDTO> findByTownSuburbName(String name) {
 
         log.info("IN PropertyServiceImpl findAllByTownSuburbName");
-        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findAll());
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByTownSuburbName(name));
     }
 
     @Override
     public List<PropertyDTO> findByDistrictName(String name) {
         log.info("IN PropertyServiceImpl findByAllDistrictName");
-        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findAll());
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByDistrictName(name));
     }
 
     @Override
     public List<PropertyDTO> findByRegionName(String name) {
         log.info("IN PropertyServiceImpl findAllByRegionName");
-        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findAll());
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByRegionName(name));
+    }
+
+    @Override
+    public List<PropertyDTO> findByTypeId(Long typeId) {
+
+        log.info("IN PropertyServiceImpl findByTypeId");
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByTypeId(typeId));
     }
 
 

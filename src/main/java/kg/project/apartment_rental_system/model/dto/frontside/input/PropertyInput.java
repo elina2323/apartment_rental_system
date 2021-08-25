@@ -1,5 +1,6 @@
-package kg.project.apartment_rental_system.model.dto;
+package kg.project.apartment_rental_system.model.dto.frontside.input;
 
+import kg.project.apartment_rental_system.model.dto.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -8,9 +9,7 @@ import java.time.LocalDate;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PropertyDTO {
-
-    Long id;
+public class PropertyInput {
 
     int roomAmount;
 
@@ -18,7 +17,7 @@ public class PropertyDTO {
 
     double price;
 
-    UserDTO user;
+    Long ownerId;
 
     String description;
 
@@ -26,25 +25,19 @@ public class PropertyDTO {
 
     double area;
 
-    TypeDTO type;
+    Long typeId;
 
     boolean internet;
 
     boolean furniture;
 
-    TownSuburbDTO townSuburb;
+    Long townSuburbId;
 
-    DistrictDTO district;
+    Long districtId;
 
-    RegionDTO region;
-
-    LocalDate addDate;
-
-    LocalDate editDate;
+    Long regionId;
 
     double lan;
 
     double lon;
-
-
 }

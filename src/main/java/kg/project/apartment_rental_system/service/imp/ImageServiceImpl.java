@@ -78,9 +78,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public ImageDTO findById(Long id)
-
-            throws ResourceNotFoundException {
+    public ImageDTO findById(Long id) throws ResourceNotFoundException {
         log.info("IN ImageServiceImpl findById {}", id);
         Image image = imageRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException

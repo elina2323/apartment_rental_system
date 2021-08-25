@@ -70,8 +70,8 @@ public class Property {
     @UpdateTimestamp
     LocalDate editDate;
 
-    String lan;
+    double lan;
 
-    String lon;
+    double lon;
 
 }

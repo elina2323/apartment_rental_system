@@ -14,6 +14,7 @@ public interface PropertyRepo extends JpaRepository<Property, Long> {
     List<Property> findByDistrictName(@NonNull String districtName);
     List<Property> findByTownSuburbName(@NonNull String townSuburbName);
     List<Property> findByRegionName(@NonNull String regionName);
+    List<Property> findByTypeId(Long typeId);
 
 
 }

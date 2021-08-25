@@ -18,4 +18,6 @@ public interface PropertyService {
     List<PropertyDTO> findByDistrictName(String name);
 
     List<PropertyDTO> findByRegionName(String name);
+
+    List<PropertyDTO> findByTypeId(Long typeId);
 }

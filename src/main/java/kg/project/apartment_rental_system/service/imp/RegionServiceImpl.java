@@ -44,12 +44,11 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public RegionDTO findById(Long id)
-       throws ResourceNotFoundException {
+    public RegionDTO findById(Long id) throws ResourceNotFoundException {
             log.info("IN RegionServiceImpl findById {}", id);
             Region region = regionRepo.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException
-                            ("Регион пункт с таким id \"%s\" не найден" + id));
+                            ("Регион с таким id \"%s\" не найден" + id));
             return RegionMapper.INSTANCE.toRegionDTO(region);
     }
 

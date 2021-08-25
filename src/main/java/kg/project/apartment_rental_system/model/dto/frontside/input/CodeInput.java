@@ -6,19 +6,18 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ReserveHistoryInput {
+public class CodeInput {
 
-    Long propertyId;
-    Long clientId;
+    String code;
 
     @CreationTimestamp
-    LocalDate checkInDate;
+    LocalDateTime startDate;
 
     @LastModifiedDate
-    LocalDate checkOutDate;
+    LocalDateTime endDate;
+    Long userId;
 }

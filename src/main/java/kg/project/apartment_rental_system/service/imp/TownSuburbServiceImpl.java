@@ -44,8 +44,7 @@ public class TownSuburbServiceImpl implements TownSuburbService {
     }
 
     @Override
-    public TownSuburbDTO findById(Long id)
-            throws ResourceNotFoundException {
+    public TownSuburbDTO findById(Long id) throws ResourceNotFoundException {
         log.info("IN TownSuburbServiceImpl findById {}", id);
         TownSuburb townSuburb = townSuburbRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException

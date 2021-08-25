@@ -45,8 +45,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public TypeDTO findById(Long id)
-            throws ResourceNotFoundException {
+    public TypeDTO findById(Long id) throws ResourceNotFoundException {
         log.info("IN TypeServiceImpl findById {}", id);
         Type type = typeRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException

@@ -1,6 +1,7 @@
-package kg.project.apartment_rental_system.model.dto;
+package kg.project.apartment_rental_system.model.dto.frontside.output;
 
-import kg.project.apartment_rental_system.model.entity.Property;
+import kg.project.apartment_rental_system.model.dto.PropertyDTO;
+import kg.project.apartment_rental_system.model.dto.UserDTO;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -12,9 +13,7 @@ import java.time.LocalDate;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ReserveHistoryDTO {
-
-    Long id;
+public class ReserveOutput {
 
     @CreationTimestamp
     LocalDate checkInDate;
@@ -22,19 +21,15 @@ public class ReserveHistoryDTO {
     @LastModifiedDate
     LocalDate checkOutDate;
 
-    PropertyDTO property;
+    Long propertyId;
 
-    UserDTO user;
+    Long clientId;
 
     double totalPrice;
 
     double debt;
 
     ReserveStatus reserveStatus;
-
-    LocalDate addDate;
-
-    LocalDate editDate;
 
 
 }

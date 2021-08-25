@@ -44,9 +44,7 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public DistrictDTO findById(Long id)
-
-            throws ResourceNotFoundException {
+    public DistrictDTO findById(Long id) throws ResourceNotFoundException {
         log.info("IN DistrictServiceImpl findById {}", id);
         District district = districtRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException

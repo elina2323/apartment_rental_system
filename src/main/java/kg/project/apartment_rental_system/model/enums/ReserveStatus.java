@@ -4,5 +4,6 @@ public enum ReserveStatus {
 
     RESERVED,
     PAID,
-    CANCELLED
+    CANCELLED,
+    DEBT
 }
