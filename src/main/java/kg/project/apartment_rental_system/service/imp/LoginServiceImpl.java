@@ -4,14 +4,12 @@ import kg.project.apartment_rental_system.mapper.UserMapper;
 import kg.project.apartment_rental_system.model.dto.CodeDTO;
 import kg.project.apartment_rental_system.model.dto.RequestDTO;
 import kg.project.apartment_rental_system.model.dto.UserDTO;
-import kg.project.apartment_rental_system.model.dto.frontside.FeignBuilder;
 import kg.project.apartment_rental_system.model.dto.frontside.output.InfoSendRequest;
 import kg.project.apartment_rental_system.model.enums.CodeStatus;
 import kg.project.apartment_rental_system.service.CodeService;
 import kg.project.apartment_rental_system.service.LoginService;
 import kg.project.apartment_rental_system.service.RequestService;
 import kg.project.apartment_rental_system.service.UserService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
+
 
 @Service
 @Slf4j
@@ -32,27 +31,34 @@ public class LoginServiceImpl implements LoginService {
 
     private final RequestService requestService;
 
-    private FeignBuilder feignBuilder;
-
     @Autowired
-    public LoginServiceImpl(UserService userService, CodeService codeService, RequestService requestService, FeignBuilder feignBuilder) {
+    public LoginServiceImpl(UserService userService, CodeService codeService, RequestService requestService ) {
         this.userService = userService;
         this.codeService = codeService;
         this.requestService = requestService;
-        this.feignBuilder = feignBuilder;
     }
 
+    /***
+     * метод getCode должен вызываться из контроллера LoginController т.е первый раз пользователь будет обращаться
+     * в этот метод и получать 4-х значный код чтоб пройти авторизацию (потдвердить себя) и попасть на страницу
+     * чтоб посмотреть квартиры либо создать объявление
+     * result не нужен
+     */
+
     @Override
-    public ResponseEntity<?> getCode(String phone, int result) throws Exception {
+    public ResponseEntity<?> getCode(String phone) throws Exception {
 
         if (phone == null || phone.length() != 12) {
             throw new RuntimeException("Отсутствует номер телефона");
         }
-
+/**
+ * если пользователя нет в базе данных нужно его сохранить иначе сразу переход к проверке заблокирован или нет
+ * удалить ошибку "Не удалось отправить SMS"
+ * */
         UserDTO userDTO = userService.findUserByPhone(phone);
-        if (userDTO == null) {
+      /*  if (userDTO == null) {
             throw new RuntimeException("Не удалось отправить SMS");
-        }
+        }*/
 
         userDTO = UserMapper.INSTANCE.addUser(phone);
         userDTO.setPhone(phone);
@@ -61,6 +67,9 @@ public class LoginServiceImpl implements LoginService {
         RequestDTO requestDTO;
         CodeDTO codeDTO;
 
+        /**
+         * сгенерировать код после того как проверим не заблокирован ли пользователь
+         * */
         String generatedCode = RandomStringUtils.randomAlphanumeric(4).toLowerCase();
         codeDTO = codeService.saveCode(userDTO, generatedCode);
         requestDTO = requestService.saveRequest(codeDTO, true);
@@ -106,9 +115,7 @@ public class LoginServiceImpl implements LoginService {
         infoSendRequest.setPhone(userDTO.getPhone());
         infoSendRequest.setSender("T-MOBILE");
         infoSendRequest.setMsg("<#>" + generatedCode + " - Vash kod podtverjdeniya. Nikomu ne peredavaite.");
-        feignBuilder.sendSMS(infoSendRequest);
-
-        return  null;
+        return  ResponseEntity.ok(infoSendRequest);
 
     }
 

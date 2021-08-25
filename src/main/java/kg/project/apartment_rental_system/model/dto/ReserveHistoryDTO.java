@@ -1,6 +1,5 @@
 package kg.project.apartment_rental_system.model.dto;
 
-import kg.project.apartment_rental_system.model.entity.Property;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.AccessLevel;
 import lombok.Data;

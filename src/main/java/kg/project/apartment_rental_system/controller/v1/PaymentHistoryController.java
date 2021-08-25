@@ -10,17 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/payment")
 public class PaymentHistoryController implements BaseController<PaymentHistoryDTO, Long> {
 
+    @Autowired
     private PaymentHistoryService paymentHistoryService;
 
-    @Autowired
-    public PaymentHistoryController(PaymentHistoryService paymentHistoryService) {
-        this.paymentHistoryService = paymentHistoryService;
-    }
+
 
     @Override
     public ResponseEntity<?> save(PaymentHistoryDTO paymentHistoryDTO) {

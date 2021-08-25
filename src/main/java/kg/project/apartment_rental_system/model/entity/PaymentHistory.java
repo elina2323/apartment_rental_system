@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)

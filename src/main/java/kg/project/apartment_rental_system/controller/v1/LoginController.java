@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/login")
 public class LoginController {
@@ -26,6 +25,14 @@ public class LoginController {
             return loginService.verifyCode(phone, smsCode);
         } catch (Exception e) {
             return new ResponseEntity <>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+        }
+    }
+    @GetMapping("/get")
+    public ResponseEntity<?> getCode(@RequestParam String phone){
+        try {
+            return loginService.getCode(phone);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse(e.getMessage()),HttpStatus.CONFLICT);
         }
     }
 }

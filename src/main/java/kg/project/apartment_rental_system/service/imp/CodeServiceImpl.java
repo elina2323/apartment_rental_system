@@ -9,6 +9,7 @@ import kg.project.apartment_rental_system.model.dto.UserDTO;
 import kg.project.apartment_rental_system.model.entity.Code;
 import kg.project.apartment_rental_system.model.enums.CodeStatus;
 import kg.project.apartment_rental_system.service.CodeService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CodeServiceImpl implements CodeService {
 
     private final CodeRepo codeRepo;
@@ -31,7 +32,7 @@ public class CodeServiceImpl implements CodeService {
         Code newCode = new Code();
         newCode.setUser(UserMapper.INSTANCE.toUser(userDTO));
 //        String generatedString = RandomStringUtils.randomAlphanumeric(4);
-//        newCode.setCode(generatedString);
+//        newCode.setCode(generatedString); это расскоментируй поэтому выкидывает ошибку что null
         newCode.setStartDate(LocalDateTime.now());
         newCode.setEndDate(LocalDateTime.now().plusHours(1));
         codeRepo.save(newCode);

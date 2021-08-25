@@ -10,8 +10,10 @@ import kg.project.apartment_rental_system.model.entity.Type;
 import kg.project.apartment_rental_system.model.entity.User;
 import kg.project.apartment_rental_system.service.CodeService;
 import kg.project.apartment_rental_system.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,11 +21,14 @@ import java.util.List;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+//@RequiredArgsConstructor здесь AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserRepo userRepo;
+    @Autowired
     private UserService userService;
+    @Autowired
     private CodeService codeService;
 
 

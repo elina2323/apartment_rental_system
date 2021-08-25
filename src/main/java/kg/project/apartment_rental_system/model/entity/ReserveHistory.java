@@ -4,7 +4,6 @@ import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "property_bookings")
-public class ReserveHistory extends ReserveHistoryDTO {
+public class ReserveHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

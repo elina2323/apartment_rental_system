@@ -25,21 +25,18 @@ import java.util.List;
 @Service
 public class PaymentHistoryServiceImpl implements PaymentHistoryService {
 
-    private final PaymentHistoryRepo paymentHistoryRepo;
-
-    private ReserveHistoryService reserveHistoryService;
-
-    private UserService userService;
-
-    private PropertyService propertyService;
+    @Autowired
+    private  PaymentHistoryRepo paymentHistoryRepo;
 
     @Autowired
-    public PaymentHistoryServiceImpl(PaymentHistoryRepo paymentHistoryRepo, ReserveHistoryService reserveHistoryService, UserService userService, PropertyService propertyService) {
-        this.paymentHistoryRepo = paymentHistoryRepo;
-        this.reserveHistoryService = reserveHistoryService;
-        this.userService = userService;
-        this.propertyService = propertyService;
-    }
+    private ReserveHistoryService reserveHistoryService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PropertyService propertyService;
+
 
     @Override
     public PaymentHistoryDTO save(PaymentHistoryDTO paymentHistoryDTO) {
@@ -102,8 +99,6 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
         }else if (paymentHistoryDTO.getCash() < reserveHistoryDTO.getTotalPrice()){
             reserveHistoryDTO.setReserveStatus(ReserveStatus.DEBT);
             reserveHistoryDTO.setDebt(reserveHistoryDTO.getTotalPrice() - paymentHistoryDTO.getCash());
-        }else if (){
-
         }
 
         PaymentHistory paymentHistory = PaymentHistoryMapper.INSTANCE.toPaymentHistory(paymentHistoryDTO);
