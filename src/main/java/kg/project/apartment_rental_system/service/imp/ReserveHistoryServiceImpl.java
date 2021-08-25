@@ -114,8 +114,8 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
 
     }
 
-    private double refund(double cash, int days){
-        return ((cash * days) * 30.0) / 100.0;
+    private double refund(double cash){
+        return (cash  * 30.0) / 100.0;
     }
 
     private boolean isAvailableBetween(List<ReserveHistoryDTO> reserveHistoryDTOList, LocalDate checkInDate, LocalDate checkOutDate) {
