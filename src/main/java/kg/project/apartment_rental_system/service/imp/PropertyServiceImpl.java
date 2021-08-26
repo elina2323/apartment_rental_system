@@ -33,8 +33,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Autowired
     private DistrictService districtService;
 
-    @Autowired
-    private PropertyMapper propertyMapper;
+    PropertyMapper propertyMapper = PropertyMapper.INSTANCE;
 
 
 
