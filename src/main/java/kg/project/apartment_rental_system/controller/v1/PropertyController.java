@@ -2,6 +2,7 @@ package kg.project.apartment_rental_system.controller.v1;
 
 import kg.project.apartment_rental_system.controller.base.BaseController;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
+import kg.project.apartment_rental_system.model.dto.frontside.input.PropertyInput;
 import kg.project.apartment_rental_system.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +13,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/property")
-public class PropertyController implements BaseController<PropertyDTO, Long> {
+public class PropertyController {
 
-    private PropertyService propertyService;
+    private final PropertyService propertyService;
 
     @Autowired
     public PropertyController(PropertyService propertyService) {
@@ -40,22 +41,22 @@ public class PropertyController implements BaseController<PropertyDTO, Long> {
     }
 
 
-    @Override
-    public ResponseEntity<?> save(PropertyDTO propertyDTO) {
-        return new ResponseEntity<>(propertyService.save(propertyDTO), HttpStatus.CREATED);
+    @PostMapping("/save")
+    public ResponseEntity<?> save(PropertyInput propertyInput) {
+        return new ResponseEntity<>(propertyService.save(propertyInput), HttpStatus.CREATED);
     }
 
-    @Override
+    @PostMapping("/update")
     public ResponseEntity<?> update(PropertyDTO propertyDTO) {
         return null;
     }
 
-    @Override
-    public ResponseEntity<?> findById(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         return null;
     }
 
-    @Override
+    @GetMapping("/find")
     public ResponseEntity<List<?>> findAll() {
         return null;
     }

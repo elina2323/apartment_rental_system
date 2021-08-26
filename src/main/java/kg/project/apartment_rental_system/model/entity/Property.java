@@ -69,7 +69,7 @@ public class Property {
     @UpdateTimestamp
     LocalDate editDate;
 
-    double lan;
+    double lat;
 
     double lon;
 

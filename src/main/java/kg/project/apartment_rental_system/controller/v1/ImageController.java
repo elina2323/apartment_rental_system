@@ -15,12 +15,9 @@ import java.util.List;
 @RequestMapping("/api/v1/image")
 public class ImageController implements BaseController<ImageDTO, Long> {
 
+    @Autowired
     private ImageService imageService;
 
-    @Autowired
-    public ImageController(ImageService imageService) {
-        this.imageService = imageService;
-    }
 
     @PostMapping("/save-image")
     public ResponseEntity<List<ImageDTO>> save(@RequestBody List<ImageInput> imageInputList){

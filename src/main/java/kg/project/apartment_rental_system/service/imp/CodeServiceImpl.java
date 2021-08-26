@@ -12,6 +12,7 @@ import kg.project.apartment_rental_system.service.CodeService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,8 +32,8 @@ public class CodeServiceImpl implements CodeService {
 
         Code newCode = new Code();
         newCode.setUser(UserMapper.INSTANCE.toUser(userDTO));
-//        String generatedString = RandomStringUtils.randomAlphanumeric(4);
-//        newCode.setCode(generatedString); это расскоментируй поэтому выкидывает ошибку что null
+        String generatedString = RandomStringUtils.randomAlphanumeric(4);
+        newCode.setCode(generatedString); // это расскоментируй поэтому выкидывает ошибку что null
         newCode.setStartDate(LocalDateTime.now());
         newCode.setEndDate(LocalDateTime.now().plusHours(1));
         codeRepo.save(newCode);

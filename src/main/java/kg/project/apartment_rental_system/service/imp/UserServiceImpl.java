@@ -21,15 +21,15 @@ import java.util.List;
 
 @Service
 @Slf4j
-//@RequiredArgsConstructor здесь AllArgsConstructor
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
     @Autowired
-    private UserService userService;
+    private final UserService userService;
     @Autowired
-    private CodeService codeService;
+    private final CodeService codeService;
 
 
     @Override
@@ -47,6 +47,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO update(UserDTO userDTO) {
+
+        log.info("IN UserServiceImpl update {}", userDTO);
+
         return null;
     }
 

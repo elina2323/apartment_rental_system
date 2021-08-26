@@ -4,12 +4,13 @@ import kg.project.apartment_rental_system.model.dto.DistrictDTO;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
 import kg.project.apartment_rental_system.model.dto.RegionDTO;
 import kg.project.apartment_rental_system.model.dto.TownSuburbDTO;
+import kg.project.apartment_rental_system.model.dto.frontside.input.PropertyInput;
 
 import java.util.List;
 
 public interface PropertyService {
 
-    PropertyDTO save(PropertyDTO propertyDTO);
+    PropertyDTO save(PropertyInput propertyInput);
 
     PropertyDTO findById(Long id);
 

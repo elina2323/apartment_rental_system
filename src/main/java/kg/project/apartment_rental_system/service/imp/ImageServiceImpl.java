@@ -24,22 +24,22 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ImageServiceImpl implements ImageService {
 
+    @Autowired
     private PropertyService propertyService;
 
+    @Autowired
     private ImageRepo imageRepo;
 
     @Autowired
-    public ImageServiceImpl(PropertyService propertyService, ImageRepo imageRepo) {
-        this.propertyService = propertyService;
-        this.imageRepo = imageRepo;
-    }
+    private PropertyMapper propertyMapper;
+
 
     @Override
     public List<ImageDTO> saveInput(List<ImageInput> imageInputList) {
 
         return imageInputList.stream().map(x-> {
             ImageDTO imageDTO = new ImageDTO();
-            imageDTO.setProperty(propertyService.findById(x.getPropertyId()));
+            imageDTO.setProperty(propertyMapper.toProperty(propertyService.findById(x.getPropertyId())));
             imageDTO.setOrderNum(x.getOrderNum());
             imageDTO.setUrl(x.getUrl());
             return save(imageDTO);

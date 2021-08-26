@@ -2,19 +2,13 @@ package kg.project.apartment_rental_system.service.imp;
 
 import kg.project.apartment_rental_system.dao.PropertyRepo;
 import kg.project.apartment_rental_system.exception.ResourceNotFoundException;
-import kg.project.apartment_rental_system.mapper.DistrictMapper;
 import kg.project.apartment_rental_system.mapper.PropertyMapper;
-import kg.project.apartment_rental_system.model.dto.DistrictDTO;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
-import kg.project.apartment_rental_system.model.dto.RegionDTO;
-import kg.project.apartment_rental_system.model.dto.TownSuburbDTO;
-import kg.project.apartment_rental_system.model.entity.District;
+import kg.project.apartment_rental_system.model.dto.frontside.input.PropertyInput;
 import kg.project.apartment_rental_system.model.entity.Property;
-import kg.project.apartment_rental_system.service.PropertyService;
+import kg.project.apartment_rental_system.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,20 +18,49 @@ import java.util.List;
 @Service
 public class PropertyServiceImpl implements PropertyService {
 
-    private final PropertyRepo propertyRepo;
+    @Autowired
+    private PropertyRepo propertyRepo;
 
     @Autowired
-    public PropertyServiceImpl(PropertyRepo propertyRepo) {
-        this.propertyRepo = propertyRepo;
-    }
+    private TownSuburbService townSuburbService;
+
+    @Autowired
+    private TypeService typeService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private DistrictService districtService;
+
+    @Autowired
+    private PropertyMapper propertyMapper;
+
+
 
     @Override
-    public PropertyDTO save(PropertyDTO propertyDTO) {
+    public PropertyDTO save(PropertyInput propertyInput) {
 
-        log.info("IN PropertyServiceImpl save {}", propertyDTO);
-        Property property = PropertyMapper.INSTANCE.toProperty(propertyDTO);
-        property = propertyRepo.save(property);
-        return PropertyMapper.INSTANCE.toPropertyDTO(property);
+        log.info("IN PropertyServiceImpl save {}", propertyInput);
+        PropertyDTO propertyDTO = new PropertyDTO();
+        propertyDTO.setAddress(propertyInput.getAddress());
+        propertyDTO.setArea(propertyInput.getArea());
+        propertyDTO.setTownSuburb(townSuburbService.findById(propertyInput.getTownSuburbId()));
+        propertyDTO.setType(typeService.findById(propertyInput.getTypeId()));
+        propertyDTO.setUser(userService.findById(propertyInput.getOwnerId()));
+        propertyDTO.setDistrict(districtService.findById(propertyInput.getDistrictId()));
+        propertyDTO.setFloor(propertyInput.getFloor());
+        propertyDTO.setFurniture(propertyInput.isFurniture());
+        propertyDTO.setInternet(propertyInput.isInternet());
+        propertyDTO.setLat(propertyInput.getLat());
+        propertyDTO.setLon(propertyInput.getLon());
+        propertyDTO.setPrice(propertyInput.getPrice());
+        propertyDTO.setRoomAmount(propertyInput.getRoomAmount());
+        propertyDTO.setDescription(propertyInput.getDescription());
+        if (propertyInput.getPrice()<=0){
+            throw new RuntimeException("Неправильно введена цена!");
+        }
+        return propertyMapper.toPropertyDTO(propertyRepo.save(propertyMapper.toProperty(propertyDTO)));
     }
 
     @Override

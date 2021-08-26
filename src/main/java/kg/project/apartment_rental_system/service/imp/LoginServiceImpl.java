@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public ResponseEntity<?> getCode(String phone) throws Exception {
 
-        if (phone == null || phone.length() != 12) {
+        if (phone == null || phone.length() != 10) {
             throw new RuntimeException("Отсутствует номер телефона");
         }
 /**
@@ -56,13 +56,14 @@ public class LoginServiceImpl implements LoginService {
  * удалить ошибку "Не удалось отправить SMS"
  * */
         UserDTO userDTO = userService.findUserByPhone(phone);
-      /*  if (userDTO == null) {
-            throw new RuntimeException("Не удалось отправить SMS");
-        }*/
+        if (userDTO != null){
+            throw new RuntimeException("Пользователь уже существует");
 
+        }
         userDTO = UserMapper.INSTANCE.addUser(phone);
         userDTO.setPhone(phone);
         userDTO = userService.save(userDTO);
+
 
         RequestDTO requestDTO;
         CodeDTO codeDTO;
@@ -70,9 +71,6 @@ public class LoginServiceImpl implements LoginService {
         /**
          * сгенерировать код после того как проверим не заблокирован ли пользователь
          * */
-        String generatedCode = RandomStringUtils.randomAlphanumeric(4).toLowerCase();
-        codeDTO = codeService.saveCode(userDTO, generatedCode);
-        requestDTO = requestService.saveRequest(codeDTO, true);
 
         LocalDateTime localDateTime = LocalDateTime.now();
 
@@ -95,6 +93,10 @@ public class LoginServiceImpl implements LoginService {
             }
 
         }
+
+        String generatedCode = RandomStringUtils.randomAlphanumeric(4).toLowerCase();
+        codeDTO = codeService.saveCode(userDTO, generatedCode);
+        requestDTO = requestService.saveRequest(codeDTO, true);
 
         CodeDTO oldCode = codeService.getCodeByUserAndCodeStatus(userDTO, CodeStatus.NEW);
         if (oldCode != null) {
@@ -150,7 +152,7 @@ public class LoginServiceImpl implements LoginService {
             userDTO = userService.save(userDTO);
             codeDTO.setCodeStatus(CodeStatus.FAILED);
             codeDTO = codeService.updateCode(codeDTO);
-            throw new RuntimeException("Число допустимых попыток превышено");
+            throw new RuntimeException("Количество допустимых попыток превышено");
         }
 
         if (codeDTO.getCode().equals(smsCode)){

@@ -3,13 +3,9 @@ package kg.project.apartment_rental_system.service.imp;
 import kg.project.apartment_rental_system.dao.ReserveHistoryRepo;
 import kg.project.apartment_rental_system.exception.ResourceNotFoundException;
 import kg.project.apartment_rental_system.mapper.ReserveHistoryMapper;
-import kg.project.apartment_rental_system.model.dto.PaymentHistoryDTO;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
 import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
-import kg.project.apartment_rental_system.model.dto.UserDTO;
 import kg.project.apartment_rental_system.model.dto.frontside.input.ReserveHistoryInput;
-import kg.project.apartment_rental_system.model.dto.frontside.output.ReserveOutput;
-import kg.project.apartment_rental_system.model.entity.PaymentHistory;
 import kg.project.apartment_rental_system.model.entity.ReserveHistory;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import kg.project.apartment_rental_system.service.PaymentHistoryService;
@@ -20,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.*;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -115,7 +111,7 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
     }
 
     private double refund(double cash){
-        return (cash  * 30.0) / 100.0;
+        return (cash * 30.0) / 100.0;
     }
 
     private boolean isAvailableBetween(List<ReserveHistoryDTO> reserveHistoryDTOList, LocalDate checkInDate, LocalDate checkOutDate) {
