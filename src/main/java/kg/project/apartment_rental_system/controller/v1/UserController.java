@@ -16,12 +16,10 @@ import java.util.List;
 @RequestMapping("api/v1/user")
 public class UserController implements BaseController<UserDTO, Long> {
 
-    private final UserService userService;
-
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private  UserService userService;
+
+
 
 
     @Override

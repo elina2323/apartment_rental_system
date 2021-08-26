@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private final UserRepo userRepo;
-    @Autowired
-    private final UserService userService;
+    //@Autowired
+   // private final UserService userService;
     @Autowired
     private final CodeService codeService;
 
