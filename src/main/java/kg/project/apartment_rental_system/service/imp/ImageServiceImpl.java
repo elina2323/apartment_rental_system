@@ -30,20 +30,24 @@ public class ImageServiceImpl implements ImageService {
     @Autowired
     private ImageRepo imageRepo;
 
-    @Autowired
-    private PropertyMapper propertyMapper;
+    ImageMapper imageMapper = ImageMapper.INSTANCE;
+    PropertyMapper propertyMapper = PropertyMapper.INSTANCE;
+
 
 
     @Override
-    public List<ImageDTO> saveInput(List<ImageInput> imageInputList) {
+    public List<ImageInput> saveInput(List<ImageInput> imageInputList) {
 
-        return imageInputList.stream().map(x-> {
-            ImageDTO imageDTO = new ImageDTO();
-            imageDTO.setProperty(propertyMapper.toProperty(propertyService.findById(x.getPropertyId())));
-            imageDTO.setOrderNum(x.getOrderNum());
-            imageDTO.setUrl(x.getUrl());
-            return save(imageDTO);
+        imageInputList.stream().map(x-> {
+            Image image = new Image();
+            image.setProperty(propertyMapper.toProperty(propertyService.findById(x.getPropertyId())));
+            image.setOrderNum(x.getOrderNum());
+            image.setUrl(x.getUrl());
+            image = imageRepo.save(image);
+            return imageMapper.toImageDTO(image);
         }).collect(Collectors.toList());
+        return imageInputList;
+
     }
 
 
