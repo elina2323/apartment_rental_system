@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/login")
 public class LoginController {
 
-
-    private final LoginService loginService;
-
     @Autowired
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
-    }
+    private LoginService loginService;
+
 
     @GetMapping("/verify")
     public ResponseEntity<?> verify(@RequestParam String phone, @RequestParam String smsCode){
@@ -29,6 +25,7 @@ public class LoginController {
     }
     @GetMapping("/get")
     public ResponseEntity<?> getCode(@RequestParam String phone){
+
         try {
             return loginService.getCode(phone);
         } catch (Exception e) {

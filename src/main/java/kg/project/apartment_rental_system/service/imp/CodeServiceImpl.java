@@ -33,7 +33,7 @@ public class CodeServiceImpl implements CodeService {
         Code newCode = new Code();
         newCode.setUser(UserMapper.INSTANCE.toUser(userDTO));
         String generatedString = RandomStringUtils.randomAlphanumeric(4);
-        newCode.setCode(generatedString); // это расскоментируй поэтому выкидывает ошибку что null
+        newCode.setCode(generatedString);
         newCode.setStartDate(LocalDateTime.now());
         newCode.setEndDate(LocalDateTime.now().plusHours(1));
         codeRepo.save(newCode);

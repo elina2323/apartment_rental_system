@@ -19,9 +19,6 @@ public class UserController implements BaseController<UserDTO, Long> {
     @Autowired
     private  UserService userService;
 
-
-
-
     @Override
     public ResponseEntity<?> save(UserDTO userDTO) {
         return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);

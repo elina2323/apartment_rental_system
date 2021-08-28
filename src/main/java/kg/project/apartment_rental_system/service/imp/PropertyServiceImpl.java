@@ -35,8 +35,6 @@ public class PropertyServiceImpl implements PropertyService {
 
     PropertyMapper propertyMapper = PropertyMapper.INSTANCE;
 
-
-
     @Override
     public PropertyDTO save(PropertyInput propertyInput) {
 

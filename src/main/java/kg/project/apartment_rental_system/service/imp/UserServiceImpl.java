@@ -21,16 +21,10 @@ import java.util.List;
 
 @Service
 @Slf4j
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private final UserRepo userRepo;
-    //@Autowired
-   // private final UserService userService;
-    @Autowired
-    private final CodeService codeService;
-
+    private UserRepo userRepo;
 
     @Override
     public UserDTO save(UserDTO userDTO) {
@@ -38,9 +32,9 @@ public class UserServiceImpl implements UserService {
         log.info("IN UserServiceImpl save {}", userDTO);
 
         User user = UserMapper.INSTANCE.toUser(userDTO);
-        if(user == userRepo.findUserByPhone(userDTO.getPhone())){
+        /*if(user == userRepo.findUserByPhone(userDTO.getPhone())){
            throw new RuntimeException("Такой пользователь уже существует");
-        }
+        }*/
         user = userRepo.save(user);
         return UserMapper.INSTANCE.toUserDTO(user);
     }

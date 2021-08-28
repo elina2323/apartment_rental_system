@@ -9,7 +9,5 @@ public interface ReserveHistoryService extends BaseService<ReserveHistoryDTO, Lo
 
     ReserveHistoryDTO saveReservation(ReserveHistoryInput reserveHistoryInput);
 
-//    ReserveOutput savePayment(Long clientId, Long reserveId, double cash);
-
 
 }
