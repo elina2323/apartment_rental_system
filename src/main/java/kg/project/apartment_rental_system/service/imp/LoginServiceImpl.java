@@ -51,6 +51,14 @@ public class LoginServiceImpl implements LoginService {
             CodeDTO codeDTO;
             RequestDTO requestDTO;
 
+            /* здесь userMapper addUser метод не нужен так как после
+            * userDto.setPhone и так присваивает телефон
+            * нужно без userMapper
+            * объявить userDto =new UserDto();
+            * userDto.setPhone(phone);
+            * остальное также останется
+            * */
+
             userDTO = UserMapper.INSTANCE.addUser(phone);
             userDTO.setPhone(phone);
             userDTO = userService.save(userDTO);
@@ -70,9 +78,10 @@ public class LoginServiceImpl implements LoginService {
 
                     long difference = localDateTime.getNano() - userDTO.getBlockDate().getNano();
 
-                    long minuteDifference = TimeUnit.MINUTES.convert(difference, TimeUnit.MILLISECONDS);
+                    //здесь исправил  на NanoSeconds
+                    long minuteDifference = TimeUnit.MINUTES.convert(difference, TimeUnit.NANOSECONDS);
 
-                    long differenceInSeconds = TimeUnit.SECONDS.convert(difference, TimeUnit.MILLISECONDS);
+                    long differenceInSeconds = TimeUnit.SECONDS.convert(difference, TimeUnit.NANOSECONDS);
 
                     long seconds = differenceInSeconds - minuteDifference * 60;
 
@@ -121,10 +130,16 @@ public class LoginServiceImpl implements LoginService {
             throw  new RuntimeException("пользователь не найден");
         }
 
-        LocalDateTime.now().minusHours(-1);
+        /*вот ошибка почему тогда код возвращал codeDto null
+        * на 138 строке ты объявила время на час раньше
+        * но в 140 строке передаешь по факту настоящее время LocalDateTime.now и поэтому
+        * база не находит код
+        * */
+      /*  LocalDateTime.now().minusHours(-1);
 
-        CodeDTO codeDTO = codeService.getCodeByUserAndCodeStatusAndStartDate(userDTO, CodeStatus.NEW, LocalDateTime.now());
+        CodeDTO codeDTO = codeService.getCodeByUserAndCodeStatusAndStartDate(userDTO, CodeStatus.NEW, LocalDateTime.now());*/
 
+        CodeDTO codeDTO = codeService.getCodeByUserAndCodeStatus(userDTO,CodeStatus.NEW);
         if (codeDTO==null){
 
             throw new RuntimeException("Прошло более 60 минут с последней отправки запроса. Запросите код повторно");

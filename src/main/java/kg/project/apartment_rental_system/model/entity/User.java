@@ -25,6 +25,5 @@ public class User {
     @NonNull
     String phone;
 
-    @UpdateTimestamp
     LocalDateTime blockDate;
 }
