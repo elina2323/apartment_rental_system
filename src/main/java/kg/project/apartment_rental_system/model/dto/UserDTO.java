@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -13,7 +14,9 @@ public class UserDTO {
 
     Long id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="+996xxxxxxxxx")
     String phone;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss")
     LocalDateTime blockDate;
 }

@@ -30,16 +30,13 @@ public class CodeServiceImpl implements CodeService {
     public CodeDTO saveCode(UserDTO userDTO, String generatedCode) {
         log.info("IN CodeServiceImpl saveCode {}", userDTO);
 
-        //при сохранении присвоить статус кода NEW
         Code newCode = new Code();
         newCode.setUser(UserMapper.INSTANCE.toUser(userDTO));
-        // здесь не нужно генерировать еще 4 х значный код надо присвоить тот что приняли
-        // newCode.setCode(generatedCode);
-        String generatedString = RandomStringUtils.randomAlphanumeric(4);
-        newCode.setCode(generatedString);
+        newCode.setCode(generatedCode);
         newCode.setStartDate(LocalDateTime.now());
         newCode.setEndDate(LocalDateTime.now().plusHours(1));
-        codeRepo.save(newCode);
+        newCode.setCodeStatus(CodeStatus.NEW);
+        newCode = codeRepo.save(newCode);
         return CodeMapper.INSTANCE.toCodeDTO(newCode);
     }
 
