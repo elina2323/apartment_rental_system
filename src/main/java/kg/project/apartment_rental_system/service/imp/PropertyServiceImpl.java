@@ -72,27 +72,55 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<PropertyDTO> findByTownSuburbName(String name) {
 
-        log.info("IN PropertyServiceImpl findAllByTownSuburbName");
+        log.info("IN PropertyServiceImpl findAllByTownSuburbName {}", name);
         return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByTownSuburbName(name));
     }
 
     @Override
     public List<PropertyDTO> findByDistrictName(String name) {
-        log.info("IN PropertyServiceImpl findByAllDistrictName");
+        log.info("IN PropertyServiceImpl findByAllDistrictName {}" , name);
         return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByDistrictName(name));
     }
 
     @Override
     public List<PropertyDTO> findByRegionName(String name) {
-        log.info("IN PropertyServiceImpl findAllByRegionName");
+        log.info("IN PropertyServiceImpl findAllByRegionName {}" , name);
         return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByRegionName(name));
     }
 
     @Override
     public List<PropertyDTO> findByTypeId(Long typeId) {
 
-        log.info("IN PropertyServiceImpl findByTypeId");
+        log.info("IN PropertyServiceImpl findByTypeId {}" , typeId);
         return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByTypeId(typeId));
+    }
+
+    @Override
+    public List<PropertyDTO> findByFurnitureIs(boolean furniture) {
+
+        log.info("IN PropertyServiceImpl findByFurnitureIs {}" , furniture);
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByFurnitureIs(furniture));
+    }
+
+    @Override
+    public List<PropertyDTO> findByInternetIs(boolean internet) {
+
+        log.info("IN PropertyServiceImpl findByInternetIs {}" , internet);
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByInternetIs(internet));
+    }
+
+    @Override
+    public List<PropertyDTO> findByRoomAmount(int roomAmount) {
+
+        log.info("IN PropertyServiceImpl findByRoomAmount {}" , roomAmount);
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByRoomAmount(roomAmount));
+    }
+
+    @Override
+    public List<PropertyDTO> findByFloor(int floor) {
+
+        log.info("IN PropertyServiceImpl findByFloor {}" , floor);
+        return PropertyMapper.INSTANCE.toPropertyDTOList(propertyRepo.findByFloor(floor));
     }
 
 
