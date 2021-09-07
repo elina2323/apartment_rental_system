@@ -1,31 +1,35 @@
 package kg.project.apartment_rental_system.controller.v1;
 
 import kg.project.apartment_rental_system.controller.base.BaseController;
-import kg.project.apartment_rental_system.model.dto.UserDTO;
-import kg.project.apartment_rental_system.service.UserService;
+import kg.project.apartment_rental_system.model.dto.TypeDTO;
+import kg.project.apartment_rental_system.model.entity.Type;
+import kg.project.apartment_rental_system.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/user")
-public class UserController{
+@RequestMapping("/api/v1/type")
+public class TypeController implements BaseController<TypeDTO, Long> {
+
+    private TypeService typeService;
 
     @Autowired
-    private  UserService userService;
-
-    /*@Override
-    public ResponseEntity<?> save(UserDTO userDTO) {
-        return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
+    public TypeController(TypeService typeService) {
+        this.typeService = typeService;
     }
 
     @Override
-    public ResponseEntity<?> update(UserDTO userDTO) {
+    public ResponseEntity<?> save(TypeDTO typeDTO) {
+        return new ResponseEntity<>(typeService.save(typeDTO), HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<?> update(TypeDTO typeDTO) {
         return null;
     }
 
@@ -37,11 +41,5 @@ public class UserController{
     @Override
     public ResponseEntity<List<?>> findAll() {
         return null;
-    }*/
-
-    @GetMapping("/find-by-phone")
-    public ResponseEntity<?> findByPhoneNumber(String phone){
-
-        return new ResponseEntity<>(userService.findUserByPhone(phone), HttpStatus.FOUND);
     }
 }

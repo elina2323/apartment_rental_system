@@ -2,6 +2,7 @@ package kg.project.apartment_rental_system.controller.v1;
 
 import kg.project.apartment_rental_system.controller.base.BaseController;
 import kg.project.apartment_rental_system.model.dto.PaymentHistoryDTO;
+import kg.project.apartment_rental_system.model.dto.frontside.input.ReserveHistoryInput;
 import kg.project.apartment_rental_system.service.PaymentHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,6 @@ public class PaymentHistoryController implements BaseController<PaymentHistoryDT
 
     @Autowired
     private PaymentHistoryService paymentHistoryService;
-
-
 
     @Override
     public ResponseEntity<?> save(PaymentHistoryDTO paymentHistoryDTO) {

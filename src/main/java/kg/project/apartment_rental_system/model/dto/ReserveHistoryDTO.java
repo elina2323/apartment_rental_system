@@ -27,8 +27,6 @@ public class ReserveHistoryDTO {
 
     double totalPrice;
 
-    double debt;
-
     ReserveStatus reserveStatus;
 
     LocalDate addDate;

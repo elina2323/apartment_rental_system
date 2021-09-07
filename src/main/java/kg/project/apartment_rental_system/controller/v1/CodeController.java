@@ -24,7 +24,7 @@ public class CodeController{
     }
 
 
-    @PostMapping("/save")
+    /*@PostMapping("/save")
     public ResponseEntity<?> save(UserDTO userDTO, String generatedCode) {
         return new ResponseEntity<>(codeService.saveCode(userDTO, generatedCode), HttpStatus.CREATED);
     }
@@ -46,9 +46,6 @@ public class CodeController{
     public ResponseEntity<?> getCodeDate(UserDTO userDTO, CodeStatus codeStatus, @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy")LocalDateTime startDate){
 
         return new ResponseEntity<>(codeService.getCodeByUserAndCodeStatusAndStartDate(userDTO, codeStatus, startDate), HttpStatus.FOUND);
-    }
-
-
-
+    }*/
 
 }

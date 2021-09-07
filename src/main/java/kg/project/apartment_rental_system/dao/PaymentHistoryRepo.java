@@ -4,7 +4,9 @@ import kg.project.apartment_rental_system.model.dto.PaymentHistoryDTO;
 import kg.project.apartment_rental_system.model.dto.frontside.output.PaymentOutput;
 import kg.project.apartment_rental_system.model.dto.frontside.output.ReserveOutput;
 import kg.project.apartment_rental_system.model.entity.PaymentHistory;
+import kg.project.apartment_rental_system.model.entity.ReserveHistory;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +15,8 @@ import java.util.List;
 @Repository
 public interface PaymentHistoryRepo extends JpaRepository<PaymentHistory,Long> {
 
-    PaymentHistory findByReserveHistory_Id(Long reserveId);
+    List<PaymentHistory> findByReserveHistoryId(Long reserveId);
 
-    PaymentHistory findByReserveHistory_ReserveStatus(ReserveStatus reserveHistory_reserveStatus);
+    List<PaymentHistory> findByReserveHistoryIdAndCash(Long reserveHistory_id, @NonNull double cash);
 
 }

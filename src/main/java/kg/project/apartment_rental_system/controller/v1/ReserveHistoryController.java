@@ -2,6 +2,7 @@ package kg.project.apartment_rental_system.controller.v1;
 
 import kg.project.apartment_rental_system.controller.base.BaseController;
 import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
+import kg.project.apartment_rental_system.model.dto.frontside.input.ReserveHistoryInput;
 import kg.project.apartment_rental_system.model.dto.frontside.output.ReserveOutput;
 import kg.project.apartment_rental_system.model.entity.ReserveHistory;
 import kg.project.apartment_rental_system.service.ReserveHistoryService;
@@ -16,11 +17,16 @@ import java.util.List;
 @RequestMapping("/api/v1/reservation")
 public class ReserveHistoryController implements BaseController<ReserveHistoryDTO, Long> {
 
-    private ReserveHistoryService reserveHistoryService;
+    private final ReserveHistoryService reserveHistoryService;
 
     @Autowired
     public ReserveHistoryController(ReserveHistoryService reserveHistoryService) {
         this.reserveHistoryService = reserveHistoryService;
+    }
+
+    @PostMapping
+    public ResponseEntity<?> saveReservation(@RequestBody ReserveHistoryInput reserveHistoryInput){
+        return new ResponseEntity<>(reserveHistoryService.saveReservation(reserveHistoryInput), HttpStatus.CREATED);
     }
 
     @Override

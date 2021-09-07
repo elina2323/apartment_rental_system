@@ -72,37 +72,11 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
     }
 
     @Override
-    public PaymentHistoryDTO findByReserveHistory_Id(Long reserveId) {
+    public PaymentHistoryDTO findByReserveHistoryId(Long reserveId) {
 
         log.info("IN PaymentHistoryServiceImpl findByReserveHistory_Id {}", reserveId);
 
-        PaymentHistory paymentHistory = paymentHistoryRepo.findByReserveHistory_Id(reserveId);
-        return PaymentHistoryMapper.INSTANCE.toPaymentHistoryDTO(paymentHistory);
-    }
-
-    @Override
-    public PaymentHistoryDTO savePayment(Long clientId, Long reserveId, double cash) {
-
-        if (cash <= 0){
-            throw new RuntimeException("Неправильно внесена сумма");
-        }
-
-        PaymentHistoryDTO paymentHistoryDTO = new PaymentHistoryDTO();
-        ReserveHistoryDTO reserveHistoryDTO = reserveHistoryService.findById(reserveId);
-        ReserveStatus reserveStatus = reserveHistoryDTO.getReserveStatus();
-        if (reserveStatus.equals(ReserveStatus.RESERVED)){
-            paymentHistoryDTO.setCash(paymentHistoryDTO.getCash());
-        }
-        if (paymentHistoryDTO.getCash() >= reserveHistoryDTO.getTotalPrice()){
-            reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
-            reserveHistoryDTO.setTotalPrice(paymentHistoryDTO.getCash() - reserveHistoryDTO.getTotalPrice());
-        }else if (paymentHistoryDTO.getCash() < reserveHistoryDTO.getTotalPrice()){
-            reserveHistoryDTO.setReserveStatus(ReserveStatus.DEBT);
-            reserveHistoryDTO.setDebt(reserveHistoryDTO.getTotalPrice() - paymentHistoryDTO.getCash());
-        }
-
-        PaymentHistory paymentHistory = PaymentHistoryMapper.INSTANCE.toPaymentHistory(paymentHistoryDTO);
-        paymentHistory = paymentHistoryRepo.save(paymentHistory);
+        PaymentHistory paymentHistory = paymentHistoryRepo.findByReserveHistoryId(reserveId);
         return PaymentHistoryMapper.INSTANCE.toPaymentHistoryDTO(paymentHistory);
     }
 

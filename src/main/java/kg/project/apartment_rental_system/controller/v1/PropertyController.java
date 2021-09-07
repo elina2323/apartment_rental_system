@@ -1,6 +1,5 @@
 package kg.project.apartment_rental_system.controller.v1;
 
-import kg.project.apartment_rental_system.controller.base.BaseController;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
 import kg.project.apartment_rental_system.model.dto.frontside.input.PropertyInput;
 import kg.project.apartment_rental_system.service.PropertyService;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/v1/property")
 public class PropertyController {
@@ -20,6 +20,11 @@ public class PropertyController {
     @Autowired
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<?> save(PropertyInput propertyInput) {
+        return new ResponseEntity<>(propertyService.save(propertyInput), HttpStatus.CREATED);
     }
 
     @GetMapping("/get-district")
@@ -40,10 +45,29 @@ public class PropertyController {
         return new ResponseEntity<>(propertyService.findByRegionName(name), HttpStatus.FOUND);
     }
 
+    @GetMapping("/get-type")
+    private  ResponseEntity<List<?>> findByType(@RequestParam Long typeId){
+        return new ResponseEntity<>(propertyService.findByTypeId(typeId), HttpStatus.FOUND);
+    }
 
-    @PostMapping("/save")
-    public ResponseEntity<?> save(PropertyInput propertyInput) {
-        return new ResponseEntity<>(propertyService.save(propertyInput), HttpStatus.CREATED);
+    @GetMapping("/get-furniture")
+    private ResponseEntity<List<?>> findByFurniture(@RequestParam boolean furniture){
+        return new ResponseEntity<>(propertyService.findByFurnitureIs(furniture), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/get-internet")
+    private ResponseEntity<List<?>> findByInternet(@RequestParam boolean internet){
+        return new ResponseEntity<>(propertyService.findByInternetIs(internet), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/get-room")
+    private ResponseEntity<List<?>> findByRoomAmount(@RequestParam int roomAmount){
+        return new ResponseEntity<>(propertyService.findByRoomAmount(roomAmount), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/get-floor")
+    private ResponseEntity<List<?>> findByFloor(@RequestParam int floor){
+        return new ResponseEntity<>(propertyService.findByFloor(floor), HttpStatus.FOUND);
     }
 
     @PostMapping("/update")
@@ -56,7 +80,7 @@ public class PropertyController {
         return null;
     }
 
-    @GetMapping("/find")
+    @GetMapping("/get")
     public ResponseEntity<List<?>> findAll() {
         return null;
     }

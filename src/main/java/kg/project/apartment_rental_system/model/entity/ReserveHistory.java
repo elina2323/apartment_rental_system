@@ -38,9 +38,6 @@ public class ReserveHistory {
     @NonNull
     double totalPrice;
 
-    @NonNull
-    double debt;
-
     @Enumerated(value = EnumType.STRING)
     ReserveStatus reserveStatus;
 

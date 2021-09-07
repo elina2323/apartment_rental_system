@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.dto.frontside.output;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
 import kg.project.apartment_rental_system.model.dto.UserDTO;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
@@ -15,19 +16,21 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ReserveOutput {
 
-    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     LocalDate checkInDate;
 
-    @LastModifiedDate
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     LocalDate checkOutDate;
 
     Long propertyId;
 
     Long clientId;
 
+    Long reserveId;
+
     double totalPrice;
 
-    double debt;
+    double cash;
 
     ReserveStatus reserveStatus;
 

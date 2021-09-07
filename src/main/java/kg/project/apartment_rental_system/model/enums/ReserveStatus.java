@@ -5,5 +5,4 @@ public enum ReserveStatus {
     RESERVED,
     PAID,
     CANCELLED,
-    DEBT
 }
