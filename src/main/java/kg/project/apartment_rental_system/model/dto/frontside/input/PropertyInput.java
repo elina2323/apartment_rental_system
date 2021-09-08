@@ -37,7 +37,7 @@ public class PropertyInput {
 
     Long regionId;
 
-    double lat;
+    double lan;
 
     double lon;
 }

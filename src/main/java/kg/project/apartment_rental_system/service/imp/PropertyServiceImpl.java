@@ -49,7 +49,7 @@ public class PropertyServiceImpl implements PropertyService {
         propertyDTO.setFloor(propertyInput.getFloor());
         propertyDTO.setFurniture(propertyInput.isFurniture());
         propertyDTO.setInternet(propertyInput.isInternet());
-        propertyDTO.setLat(propertyInput.getLat());
+        propertyDTO.setLan(propertyInput.getLan());
         propertyDTO.setLon(propertyInput.getLon());
         propertyDTO.setPrice(propertyInput.getPrice());
         propertyDTO.setRoomAmount(propertyInput.getRoomAmount());
