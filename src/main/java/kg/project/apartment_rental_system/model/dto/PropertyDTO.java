@@ -42,7 +42,7 @@ public class PropertyDTO {
 
     LocalDate editDate;
 
-    double lan;
+    double lat;
 
     double lon;
 
