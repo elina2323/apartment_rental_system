@@ -1,6 +1,5 @@
 package kg.project.apartment_rental_system.service.imp;
 
-import jdk.nashorn.internal.runtime.PropertyMap;
 import kg.project.apartment_rental_system.dao.ImageRepo;
 import kg.project.apartment_rental_system.exception.ResourceNotFoundException;
 import kg.project.apartment_rental_system.mapper.ImageMapper;
@@ -9,10 +8,8 @@ import kg.project.apartment_rental_system.model.dto.ImageDTO;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
 import kg.project.apartment_rental_system.model.dto.frontside.input.ImageInput;
 import kg.project.apartment_rental_system.model.entity.Image;
-import kg.project.apartment_rental_system.model.entity.Property;
 import kg.project.apartment_rental_system.service.ImageService;
 import kg.project.apartment_rental_system.service.PropertyService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +30,10 @@ public class ImageServiceImpl implements ImageService {
     ImageMapper imageMapper = ImageMapper.INSTANCE;
     PropertyMapper propertyMapper = PropertyMapper.INSTANCE;
 
-
-
     @Override
-    public List<ImageInput> saveInput(List<ImageInput> imageInputList) {
+    public List<ImageInput> saveImage(List<ImageInput> imageInputList) {
+
+        log.info("IN ImageServiceImpl saveImage {}", imageInputList);
 
         imageInputList.stream().map(x-> {
             Image image = new Image();
@@ -47,9 +44,7 @@ public class ImageServiceImpl implements ImageService {
             return imageMapper.toImageDTO(image);
         }).collect(Collectors.toList());
         return imageInputList;
-
     }
-
 
     @Override
     public void saveByUrl(String url, PropertyDTO propertyDTO) {

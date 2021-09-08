@@ -17,6 +17,4 @@ public interface PaymentHistoryRepo extends JpaRepository<PaymentHistory,Long> {
 
     List<PaymentHistory> findByReserveHistoryId(Long reserveId);
 
-    List<PaymentHistory> findByReserveHistoryIdAndCash(Long reserveHistory_id, @NonNull double cash);
-
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/reservation")
-public class ReserveHistoryController implements BaseController<ReserveHistoryDTO, Long> {
+public class ReserveHistoryController{
 
     private final ReserveHistoryService reserveHistoryService;
 
@@ -24,30 +24,14 @@ public class ReserveHistoryController implements BaseController<ReserveHistoryDT
         this.reserveHistoryService = reserveHistoryService;
     }
 
-    @PostMapping
+    @PostMapping("save")
     public ResponseEntity<?> saveReservation(@RequestBody ReserveHistoryInput reserveHistoryInput){
         return new ResponseEntity<>(reserveHistoryService.saveReservation(reserveHistoryInput), HttpStatus.CREATED);
     }
 
-    @Override
-    public ResponseEntity<?> save(ReserveHistoryDTO reserveHistoryDTO) {
-        return new ResponseEntity<>(reserveHistoryService.save(reserveHistoryDTO), HttpStatus.CREATED);
+    @PostMapping("pay")
+    public ResponseEntity<?> executePayment(@RequestParam Long clientId, @RequestParam Long reserveId, @RequestParam double cash){
+        return new ResponseEntity<>(reserveHistoryService.executePayment(clientId, reserveId, cash), HttpStatus.OK);
     }
-
-    @Override
-    public ResponseEntity<?> update(ReserveHistoryDTO reserveHistoryDTO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<List<?>> findAll() {
-        return null;
-    }
-
 
 }

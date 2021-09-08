@@ -32,22 +32,18 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ReserveHistoryServiceImpl implements ReserveHistoryService {
 
-    private final ReserveHistoryRepo reserveHistoryRepo;
-
-    private final PropertyService propertyService;
-
-    private final PaymentHistoryService paymentHistoryService;
-
-    private final UserService userService;
-
+    @Autowired
+    private ReserveHistoryRepo reserveHistoryRepo;
 
     @Autowired
-    public ReserveHistoryServiceImpl(ReserveHistoryRepo reserveHistoryRepo, PropertyService propertyService, PaymentHistoryService paymentHistoryService, UserService userService) {
-        this.reserveHistoryRepo = reserveHistoryRepo;
-        this.propertyService = propertyService;
-        this.paymentHistoryService = paymentHistoryService;
-        this.userService = userService;
-    }
+    private PropertyService propertyService;
+
+    @Autowired
+    private PaymentHistoryService paymentHistoryService;
+
+    @Autowired
+    private UserService userService;
+
 
     @Override
     public ReserveHistoryDTO save(ReserveHistoryDTO reserveHistoryDTO) {
@@ -157,29 +153,29 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
             reserveOutput.setPropertyId(reserveHistoryDTO.getProperty().getId());
             reserveOutput.setCheckInDate(reserveHistoryDTO.getCheckInDate());
             reserveOutput.setCheckOutDate(reserveHistoryDTO.getCheckOutDate());
-            return reserveOutputInfo(reserveHistoryDTO, cash);
+            return ReserveHistoryMapper.INSTANCE.toReserveOutputDTO(reserveHistoryDTO, cash);
 
         }
 
     @Override
     public ReserveOutput refund(Long clientId, Long reserveId, double cash) {
+
+        PaymentHistoryDTO paymentHistoryDTO = new PaymentHistoryDTO();
+        ReserveHistoryDTO reserveHistoryDTO = findById(reserveId);
+        UserDTO userDTO = userService.findById(clientId);
+        reserveHistoryDTO.setUser(userDTO);
+        userDTO.setPhone(userDTO.getPhone());
+        reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
+
+        List<PaymentHistoryDTO> paymentHistoryDTOList = paymentHistoryService.findByReserveHistoryId(reserveId);
+
+
+
         return null;
     }
 
-    public ReserveOutput reserveOutputInfo(ReserveHistoryDTO reserveHistoryDTO, double cash){
-            ReserveOutput reserveOutput = new ReserveOutput();
-            reserveOutput.setReserveStatus(reserveHistoryDTO.getReserveStatus());
-            reserveOutput.setClientId(reserveHistoryDTO.getUser().getId());
-            reserveOutput.setCheckInDate(reserveHistoryDTO.getCheckInDate());
-            reserveOutput.setCheckOutDate(reserveHistoryDTO.getCheckOutDate());
-            reserveOutput.setTotalPrice(reserveHistoryDTO.getTotalPrice());
-            reserveOutput.setCash(cash);
-            reserveOutput.setPropertyId(reserveHistoryDTO.getProperty().getId());
-            return reserveOutput;
-        }
 
-
-        private double refund ( double cash){
+        private double refund (double cash){
             return (cash * 30.0) / 100.0;
         }
 

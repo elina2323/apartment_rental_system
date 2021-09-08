@@ -11,6 +11,5 @@ public interface PaymentHistoryService extends BaseService<PaymentHistoryDTO, Lo
 
     List<PaymentHistoryDTO> findByReserveHistoryId(Long reserveId);
 
-    List<PaymentHistoryDTO> findByReserveHistoryIdAndCash(Long reserveHistory_id, @NonNull double cash);
 
 }

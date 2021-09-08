@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ImageService extends BaseService<ImageDTO, Long> {
 
-    List<ImageInput> saveInput(List<ImageInput> imageInputList);
-
+    List<ImageInput> saveImage(List<ImageInput> imageInputList);
     void saveByUrl(String url, PropertyDTO propertyDTO);
 }

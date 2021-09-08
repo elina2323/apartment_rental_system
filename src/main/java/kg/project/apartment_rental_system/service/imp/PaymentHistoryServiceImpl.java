@@ -72,12 +72,11 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
     }
 
     @Override
-    public PaymentHistoryDTO findByReserveHistoryId(Long reserveId) {
+    public List<PaymentHistoryDTO> findByReserveHistoryId(Long reserveId) {
 
         log.info("IN PaymentHistoryServiceImpl findByReserveHistory_Id {}", reserveId);
 
-        PaymentHistory paymentHistory = paymentHistoryRepo.findByReserveHistoryId(reserveId);
-        return PaymentHistoryMapper.INSTANCE.toPaymentHistoryDTO(paymentHistory);
+        return PaymentHistoryMapper.INSTANCE.toPaymentHistoryDTOList(paymentHistoryRepo.findByReserveHistoryId(reserveId));
     }
 
 }

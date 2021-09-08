@@ -22,7 +22,7 @@ public class ImageController {
 
     @PostMapping("/save-image")
     public ResponseEntity<List<?>> save(@RequestBody List<ImageInput> imageInputList){
-        return new ResponseEntity<>(imageService.saveInput(imageInputList), HttpStatus.CREATED);
+        return new ResponseEntity<>(imageService.saveImage(imageInputList), HttpStatus.CREATED);
     }
 
 }
