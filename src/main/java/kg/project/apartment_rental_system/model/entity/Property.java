@@ -30,7 +30,7 @@ public class Property {
     double price;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "users")
+    @JoinColumn(columnDefinition = "user_id")
     User user;
 
     String description;

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "town_suburbs_id")
+@Table(name = "town_suburbs")
 public class TownSuburb {
 
     @Id

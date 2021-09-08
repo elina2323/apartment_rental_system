@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "property_bookings")
+@Table(name = "reserve_histories")
 public class ReserveHistory {
 
     @Id
