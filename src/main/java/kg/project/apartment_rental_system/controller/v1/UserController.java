@@ -19,26 +19,6 @@ public class UserController{
     @Autowired
     private  UserService userService;
 
-    /*@Override
-    public ResponseEntity<?> save(UserDTO userDTO) {
-        return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
-    }
-
-    @Override
-    public ResponseEntity<?> update(UserDTO userDTO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<List<?>> findAll() {
-        return null;
-    }*/
-
     @GetMapping("/find-by-phone")
     public ResponseEntity<?> findByPhoneNumber(String phone){
 
