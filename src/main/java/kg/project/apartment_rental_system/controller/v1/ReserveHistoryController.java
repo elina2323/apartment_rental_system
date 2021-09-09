@@ -1,17 +1,12 @@
 package kg.project.apartment_rental_system.controller.v1;
 
-import kg.project.apartment_rental_system.controller.base.BaseController;
-import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
 import kg.project.apartment_rental_system.model.dto.frontside.input.ReserveHistoryInput;
-import kg.project.apartment_rental_system.model.dto.frontside.output.ReserveOutput;
-import kg.project.apartment_rental_system.model.entity.ReserveHistory;
+import kg.project.apartment_rental_system.model.responces.ErrorResponse;
 import kg.project.apartment_rental_system.service.ReserveHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/reservation")
@@ -26,12 +21,20 @@ public class ReserveHistoryController{
 
     @PostMapping("save")
     public ResponseEntity<?> saveReservation(@RequestBody ReserveHistoryInput reserveHistoryInput){
-        return new ResponseEntity<>(reserveHistoryService.saveReservation(reserveHistoryInput), HttpStatus.CREATED);
+        try {
+            return reserveHistoryService.saveReservation(reserveHistoryInput);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+        }
     }
 
     @PostMapping("pay")
     public ResponseEntity<?> executePayment(@RequestParam Long clientId, @RequestParam Long reserveId, @RequestParam double cash){
-        return new ResponseEntity<>(reserveHistoryService.executePayment(clientId, reserveId, cash), HttpStatus.OK);
+        try {
+            return reserveHistoryService.executePayment(clientId, reserveId, cash);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+        }
     }
 
 }

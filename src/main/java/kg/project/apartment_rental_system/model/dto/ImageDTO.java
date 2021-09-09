@@ -4,17 +4,15 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PaymentHistoryDTO {
+public class ImageDTO {
 
     Long id;
 
-    LocalDate addDate;
+    PropertyDTO property;
 
-    double cash;
+    String url;
 
-    ReserveHistoryDTO reserveHistory;
+    long orderNum;
 }

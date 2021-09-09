@@ -3,20 +3,14 @@ package kg.project.apartment_rental_system.service.imp;
 import kg.project.apartment_rental_system.dao.PaymentHistoryRepo;
 import kg.project.apartment_rental_system.exception.ResourceNotFoundException;
 import kg.project.apartment_rental_system.mapper.PaymentHistoryMapper;
-import kg.project.apartment_rental_system.mapper.PropertyMapper;
 import kg.project.apartment_rental_system.model.dto.PaymentHistoryDTO;
-import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
-import kg.project.apartment_rental_system.model.dto.UserDTO;
 import kg.project.apartment_rental_system.model.entity.PaymentHistory;
-import kg.project.apartment_rental_system.model.entity.Property;
-import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import kg.project.apartment_rental_system.service.PaymentHistoryService;
 import kg.project.apartment_rental_system.service.PropertyService;
 import kg.project.apartment_rental_system.service.ReserveHistoryService;
 import kg.project.apartment_rental_system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +20,7 @@ import java.util.List;
 public class PaymentHistoryServiceImpl implements PaymentHistoryService {
 
     @Autowired
-    private  PaymentHistoryRepo paymentHistoryRepo;
+    private PaymentHistoryRepo paymentHistoryRepo;
 
     @Autowired
     private ReserveHistoryService reserveHistoryService;
@@ -78,5 +72,7 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
 
         return PaymentHistoryMapper.INSTANCE.toPaymentHistoryDTOList(paymentHistoryRepo.findByReserveHistoryId(reserveId));
     }
+
+
 
 }

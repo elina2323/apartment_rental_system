@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.dto.frontside.input;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -16,9 +17,9 @@ public class ReserveHistoryInput {
     Long propertyId;
     Long clientId;
 
-    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     LocalDate checkInDate;
 
-    @LastModifiedDate
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     LocalDate checkOutDate;
 }

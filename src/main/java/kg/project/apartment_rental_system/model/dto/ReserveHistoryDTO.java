@@ -1,5 +1,6 @@
 package kg.project.apartment_rental_system.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -15,10 +16,10 @@ public class ReserveHistoryDTO {
 
     Long id;
 
-    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     LocalDate checkInDate;
 
-    @LastModifiedDate
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     LocalDate checkOutDate;
 
     PropertyDTO property;

@@ -21,7 +21,7 @@ public interface ReserveHistoryMapper {
 
     List<ReserveHistoryDTO> toReserveHistoryDTOList(List<ReserveHistory> reserveHistoryList);
 
-    public default ReserveOutput toReserveOutputDTO(ReserveHistoryDTO reserveHistoryDTO, double cash){
+    default ReserveOutput toReserveOutputDTO(ReserveHistoryDTO reserveHistoryDTO, double cash){
         ReserveOutput reserveOutput = new ReserveOutput();
         reserveOutput.setReserveStatus(reserveHistoryDTO.getReserveStatus());
         reserveOutput.setClientId(reserveHistoryDTO.getUser().getId());

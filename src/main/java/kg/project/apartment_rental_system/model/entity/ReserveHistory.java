@@ -4,6 +4,9 @@ import kg.project.apartment_rental_system.model.dto.ReserveHistoryDTO;
 import kg.project.apartment_rental_system.model.enums.ReserveStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,10 +24,10 @@ public class ReserveHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NonNull
+    @UpdateTimestamp
     LocalDate checkInDate;
 
-    @NonNull
+    @LastModifiedDate
     LocalDate checkOutDate;
 
     @ManyToOne
