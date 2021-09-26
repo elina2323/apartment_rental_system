@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -127,7 +128,9 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
 
         List<PaymentHistoryDTO> paymentHistoryDTOList = paymentHistoryService.findByReserveHistoryId(reserveId);
 
-        if (paymentHistoryDTOList == null) {
+
+        /*if (paymentHistoryDTOList == null) {
+        здесб нет проверки если он полностью оплачивает стоимостью то статус поставить PAID
             paymentHistoryDTO.setCash(cash);
         } else {
             double deposit = paymentHistoryDTOList.stream().mapToDouble(PaymentHistoryDTO::getCash).sum();
@@ -135,8 +138,20 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
             if (deposit + paymentHistoryDTO.getCash() >= reserveHistoryDTO.getTotalPrice()) {
                 reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
             }
+        }*/
+
+        //Второй вариант
+        //Начало второго варианта {
+        paymentHistoryDTO.setCash(cash);
+        double deposit=0;
+        if (Objects.nonNull(paymentHistoryDTOList)){
+            deposit = paymentHistoryDTOList.stream().mapToDouble(PaymentHistoryDTO::getCash).sum();
         }
 
+        if (deposit + paymentHistoryDTO.getCash() >= reserveHistoryDTO.getTotalPrice()) {
+            reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
+        }
+        // } конец второго варианта
             reserveHistoryDTO = save(reserveHistoryDTO);
             paymentHistoryDTO.setReserveHistory(reserveHistoryDTO);
             PaymentHistoryDTO paymentHistoryDTOSaved = paymentHistoryService.save(paymentHistoryDTO);
@@ -158,14 +173,33 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
     public ResponseEntity<PaymentOutput> refund(Long paymentId, Long reserveId, Long clientId) {
 
         PaymentHistoryDTO paymentHistoryDTO = paymentHistoryService.findById(paymentId);
+
+        /*если находимся в ReserveHistoryServiceImpl то можно напрямую
+         получить класс ReserveHistory и работать с ним не нужно маппить в ReserveHistoryDto
+         */
         ReserveHistoryDTO reserveHistoryDTO = findById(reserveId);
         UserDTO userDTO = userService.findById(clientId);
-        reserveHistoryDTO.setUser(userDTO);
+       /*здесь не нужно присвавать userDto так как класс ReserveHistoryDto
+        и так внутри содержит класс UserDto который возвращается из Бд
+        */
+       // reserveHistoryDTO.setUser(userDTO);
+        // здесь получилось так что userDTO берет у себя же телефон и присваивает себе же рекурсия
         userDTO.setPhone(userDTO.getPhone());
         reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
 
+        // эти две строки вообще не нужны
         ReserveHistoryDTO reserveHistoryDTO1 = paymentHistoryDTO.getReserveHistory();
         reserveHistoryDTO1.setTotalPrice(reserveHistoryDTO1.getTotalPrice() - paymentHistoryDTO.getCash());
+
+        /**
+         * чтоб вернуть 30 процент платежа
+         * нам нужно найти ReserveHistory по полученной reserveId
+         * по найденному ReserveHistory reserve найти все платежи т.е
+         * List<PaymentHistoryDto> paymentHistoryDtoList = paymentHistoryService.findByReserveHistory(reserve)
+         * использовать stream просуммировать в paymentHistoryDtoList поле cash
+         * и от найденной суммы вернуть 30 процент
+         *
+         */
 
 
 //        double paidReservation =
