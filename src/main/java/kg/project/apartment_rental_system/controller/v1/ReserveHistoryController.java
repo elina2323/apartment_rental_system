@@ -37,4 +37,13 @@ public class ReserveHistoryController{
         }
     }
 
+    @PostMapping("refund")
+    public ResponseEntity<?> refundPayment(@RequestParam Long clientId, @RequestParam Long reserveId, @RequestParam Long paymentId){
+        try {
+            return reserveHistoryService.executePayment(clientId, reserveId, paymentId);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+        }
+    }
+
 }
