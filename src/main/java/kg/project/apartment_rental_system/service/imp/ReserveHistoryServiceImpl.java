@@ -128,18 +128,6 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
 
         List<PaymentHistoryDTO> paymentHistoryDTOList = paymentHistoryService.findByReserveHistoryId(reserveId);
 
-
-        /*if (paymentHistoryDTOList == null) {
-        здесб нет проверки если он полностью оплачивает стоимостью то статус поставить PAID
-            paymentHistoryDTO.setCash(cash);
-        } else {
-            double deposit = paymentHistoryDTOList.stream().mapToDouble(PaymentHistoryDTO::getCash).sum();
-            paymentHistoryDTO.setCash(cash);
-            if (deposit + paymentHistoryDTO.getCash() >= reserveHistoryDTO.getTotalPrice()) {
-                reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
-            }
-        }*/
-
         //Второй вариант
         //Начало второго варианта {
         paymentHistoryDTO.setCash(cash);
@@ -174,22 +162,25 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
 
         PaymentHistoryDTO paymentHistoryDTO = paymentHistoryService.findById(paymentId);
 
-        /*если находимся в ReserveHistoryServiceImpl то можно напрямую
-         получить класс ReserveHistory и работать с ним не нужно маппить в ReserveHistoryDto
-         */
         ReserveHistoryDTO reserveHistoryDTO = findById(reserveId);
-        UserDTO userDTO = userService.findById(clientId);
-       /*здесь не нужно присвавать userDto так как класс ReserveHistoryDto
-        и так внутри содержит класс UserDto который возвращается из Бд
-        */
-       // reserveHistoryDTO.setUser(userDTO);
-        // здесь получилось так что userDTO берет у себя же телефон и присваивает себе же рекурсия
-        userDTO.setPhone(userDTO.getPhone());
-        reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
 
-        // эти две строки вообще не нужны
-        ReserveHistoryDTO reserveHistoryDTO1 = paymentHistoryDTO.getReserveHistory();
-        reserveHistoryDTO1.setTotalPrice(reserveHistoryDTO1.getTotalPrice() - paymentHistoryDTO.getCash());
+        UserDTO userDTO = userService.findById(clientId);
+
+        List<PaymentHistoryDTO> paymentHistoryDTOList = paymentHistoryService.findByReserveHistoryId(reserveId);
+
+        if (!paymentHistoryDTOList.isEmpty())
+        {paymentHistoryDTOList.stream().mapToDouble(PaymentHistoryDTO::getCash).sum();}
+
+        double refundMoney = paymentHistoryDTO.getCash() * 30.0 / 100;
+
+        PaymentOutput paymentOutput = new PaymentOutput();
+        paymentOutput.setReserveStatus(ReserveStatus.CANCELLED);
+        paymentOutput.setCash(refundMoney);
+
+
+
+
+
 
         /**
          * чтоб вернуть 30 процент платежа
@@ -201,15 +192,8 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
          *
          */
 
-
-//        double paidReservation =
-
         return null;
     }
-
-        private double refundMoney (double cash){
-            return (cash * 30.0) / 100.0;
-        }
 
         private boolean isAvailableBetween (List < ReserveHistoryDTO > reserveHistoryDTOList, LocalDate
         checkInDate, LocalDate checkOutDate){
