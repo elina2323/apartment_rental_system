@@ -2,6 +2,7 @@ package kg.project.apartment_rental_system.service.imp;
 
 import kg.project.apartment_rental_system.dao.ReserveHistoryRepo;
 import kg.project.apartment_rental_system.exception.ResourceNotFoundException;
+import kg.project.apartment_rental_system.mapper.PaymentHistoryMapper;
 import kg.project.apartment_rental_system.mapper.ReserveHistoryMapper;
 import kg.project.apartment_rental_system.model.dto.PaymentHistoryDTO;
 import kg.project.apartment_rental_system.model.dto.PropertyDTO;
@@ -128,8 +129,6 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
 
         List<PaymentHistoryDTO> paymentHistoryDTOList = paymentHistoryService.findByReserveHistoryId(reserveId);
 
-        //Второй вариант
-        //Начало второго варианта {
         paymentHistoryDTO.setCash(cash);
         double deposit=0;
         if (Objects.nonNull(paymentHistoryDTOList)){
@@ -139,7 +138,7 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
         if (deposit + paymentHistoryDTO.getCash() >= reserveHistoryDTO.getTotalPrice()) {
             reserveHistoryDTO.setReserveStatus(ReserveStatus.PAID);
         }
-        // } конец второго варианта
+
             reserveHistoryDTO = save(reserveHistoryDTO);
             paymentHistoryDTO.setReserveHistory(reserveHistoryDTO);
             PaymentHistoryDTO paymentHistoryDTOSaved = paymentHistoryService.save(paymentHistoryDTO);
@@ -177,20 +176,6 @@ public class ReserveHistoryServiceImpl implements ReserveHistoryService {
         paymentOutput.setReserveStatus(ReserveStatus.CANCELLED);
         paymentOutput.setCash(refundMoney);
 
-
-
-
-
-
-        /**
-         * чтоб вернуть 30 процент платежа
-         * нам нужно найти ReserveHistory по полученной reserveId
-         * по найденному ReserveHistory reserve найти все платежи т.е
-         * List<PaymentHistoryDto> paymentHistoryDtoList = paymentHistoryService.findByReserveHistory(reserve)
-         * использовать stream просуммировать в paymentHistoryDtoList поле cash
-         * и от найденной суммы вернуть 30 процент
-         *
-         */
 
         return null;
     }
